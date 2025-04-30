@@ -1,10 +1,9 @@
-
-
 import 'package:flutter/material.dart';
+import 'package:hero_anim/pages/detail_page.dart';
+import 'package:hero_anim/pages/favorites_page.dart';
 import 'package:hero_anim/provider/destination_provider.dart';
 import 'package:hero_anim/widget/my_appbar.dart';
 import 'package:provider/provider.dart';
-import '../detail_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -14,7 +13,20 @@ class HomePage extends StatelessWidget {
     final destinations = Provider.of<DestinationProvider>(context).destinations;
 
     return Scaffold(
-      appBar: MyAppBar(title: "HeroAnimation"),
+      appBar: MyAppBar(
+        title: "Animation",
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.favorite),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const FavoritePage()),
+              );
+            },
+          )
+        ],
+      ),
       body: ListView.builder(
         itemCount: destinations.length,
         itemBuilder: (context, index) {

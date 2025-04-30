@@ -39,7 +39,27 @@ class DestinationProvider with ChangeNotifier {
     'Beautiful country.',
         '\$1500', 
         false),
+          Destination('images/maldives.webp', 'Maldives',
+        'A tropical paradise with stunning beaches.', '\$1200', true),
+    Destination('images/nepal.png', 'Nepal',
+        'Country of the Gods with vibrant culture.', '\$900', true),
+         Destination(
+      'https://imgs.search.brave.com/0DJ8BcdiG7jYG_jAQw9m7iaDmMqvi1ZUqsoeU3n9BgU/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/cHJlbWl1bS1waG90/by92aWN0b3JpYS1w/ZWFrLWhvbmcta29u/Zy0yMi1qdW5lLTIw/MTYtaG9uZy1rb25n/LWNpdHlfMzI4MTkx/LTgxLmpwZz9zZW10/PWFpc19oeWJyaWQm/dz03NDA',
+      'HongKong',
+      'Beautiful Skyscrappers',
+      '\$1500',
+      false,
+    ),
   ];
 
   List<Destination> get destinations => _destinations;
+
+  
+  void toggleFavorite(Destination destination) {
+    destination.isFavorite = !destination.isFavorite;
+    notifyListeners();
+  }
+
+  List<Destination> get favoriteDestinations =>
+      _destinations.where((d) => d.isFavorite).toList();
 }

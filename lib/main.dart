@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hero_anim/pages/welcome_screen.dart';
 import 'package:hero_anim/provider/destination_provider.dart';
 import 'package:provider/provider.dart';
-import 'pages/home_page.dart';
 
 void main() {
   runApp(
@@ -26,7 +26,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         useMaterial3: false,
         ),
-      home: HomePage(),
+      // home: HomePage(),
+      home: const WelcomeScreen(),
     );
   }
 }

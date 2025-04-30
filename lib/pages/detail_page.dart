@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hero_anim/model/destination_model.dart';
 import 'package:hero_anim/widget/my_appbar.dart';
+import 'package:provider/provider.dart';
+import 'package:hero_anim/provider/destination_provider.dart';
 
 class DetailPage extends StatelessWidget {
   final Destination destination;
@@ -10,7 +12,34 @@ class DetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(title: destination.name ,),
+      appBar: MyAppBar(
+        title: destination.name,
+        actions: [
+          Consumer<DestinationProvider>(
+            builder: (context, provider, _) {
+              return IconButton(
+                icon: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 300),
+                  transitionBuilder: (child, animation) => ScaleTransition(
+                    scale: animation,
+                    child: child,
+                  ),
+                  child: Icon(
+                    destination.isFavorite
+                        ? Icons.favorite
+                        : Icons.favorite_border,
+                    key: ValueKey<bool>(destination.isFavorite),
+                    color: destination.isFavorite ? Colors.red : Colors.grey,
+                  ),
+                ),
+                onPressed: () {
+                  provider.toggleFavorite(destination);
+                },
+              );
+            },
+          ),
+        ],
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
