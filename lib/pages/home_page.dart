@@ -1,0 +1,51 @@
+
+
+import 'package:flutter/material.dart';
+import 'package:hero_anim/provider/destination_provider.dart';
+import 'package:hero_anim/widget/my_appbar.dart';
+import 'package:provider/provider.dart';
+import '../detail_page.dart';
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final destinations = Provider.of<DestinationProvider>(context).destinations;
+
+    return Scaffold(
+      appBar: MyAppBar(title: "HeroAnimation"),
+      body: ListView.builder(
+        itemCount: destinations.length,
+        itemBuilder: (context, index) {
+          final destination = destinations[index];
+          return ListTile(
+            contentPadding: const EdgeInsets.all(10),
+            leading: Hero(
+              tag: destination.imageUrl,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: destination.isAsset
+                    ? Image.asset(destination.imageUrl,
+                        width: 80, height: 80, fit: BoxFit.cover)
+                    : Image.network(destination.imageUrl,
+                        width: 80, height: 80, fit: BoxFit.cover),
+              ),
+            ),
+            title: Text(destination.name),
+            subtitle: Text(destination.description),
+            trailing: Text(destination.price),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => DetailPage(destination: destination),
+                ),
+              );
+            },
+          );
+        },
+      ),
+    );
+  }
+}
