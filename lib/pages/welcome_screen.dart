@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hero_anim/pages/home_page.dart';
-import 'package:hero_anim/widget/animated_text_widget.dart';
+import 'package:hero_anim/animation/animated_text_widget.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -70,7 +70,7 @@ Widget build(BuildContext context) {
       children: [
         const SizedBox(height: 80),
 
-        //  Responsive Fade-in Image
+        //  Fade-in anim Image
         FadeTransition(
           opacity: _fadeAnimation,
           child: Image.asset(
@@ -83,7 +83,7 @@ Widget build(BuildContext context) {
 
         const SizedBox(height: 40),
 
-        // ✅ Animated Texts from Corners
+        // Animated Texts from Corners
         Expanded(
           child: Center(
             child: Stack(
@@ -98,7 +98,7 @@ Widget build(BuildContext context) {
           ),
         ),
 
-        // ✅ Animated Get Started Button
+        // animated  Button
         SlideTransition(
           position: Tween<Offset>(
             begin: const Offset(0, 1),

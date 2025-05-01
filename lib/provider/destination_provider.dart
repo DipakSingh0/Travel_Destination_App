@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hero_anim/model/destination_model.dart';
+import 'package:hive/hive.dart';
 
 class DestinationProvider with ChangeNotifier {
   final List<Destination> _destinations = [
@@ -52,14 +53,62 @@ class DestinationProvider with ChangeNotifier {
     ),
   ];
 
+  //using hive as persistance storage
+  final Box<Destination> _favoritesBox = Hive.box<Destination>('favorites');
+
   List<Destination> get destinations => _destinations;
 
-  
+// adding favorites to list
+    List<Destination> get favoriteDestinations {
+    return _favoritesBox.values.toList();
+  }
+
   void toggleFavorite(Destination destination) {
     destination.isFavorite = !destination.isFavorite;
+
+       if (destination.isFavorite) {
+      _addToFavorites(destination);
+    } else {
+      _removeFromFavorites(destination);
+    }
     notifyListeners();
   }
 
-  List<Destination> get favoriteDestinations =>
-      _destinations.where((d) => d.isFavorite).toList();
+//   List<Destination> get favoriteDestinations =>
+//       _destinations.where((d) => d.isFavorite).toList();
+// }
+
+  void _addToFavorites(Destination destination) {
+    // Check if already exists to avoid duplicates
+    if (!_favoritesBox.values.any((d) => d.imageUrl == destination.imageUrl)) {
+      _favoritesBox.add(destination);
+    }
+  }
+
+    void _removeFromFavorites(Destination destination) {
+    // Find the key for this destination
+    final key = _favoritesBox.keys.firstWhere(
+      (k) => _favoritesBox.get(k)?.imageUrl == destination.imageUrl,
+      orElse: () => null,
+    );
+
+    if (key != null) {
+      _favoritesBox.delete(key);
+    }
+  }
+
+    // Check if a destination is favorite
+  bool isFavorite(Destination destination) {
+    return _favoritesBox.values.any((d) => d.imageUrl == destination.imageUrl);
+  }
+
+  // Load favorites status when app starts
+  void loadFavoritesStatus() {
+    for (var destination in _destinations) {
+      destination.isFavorite = isFavorite(destination);
+    }
+    notifyListeners();
+  }
+
+
 }
