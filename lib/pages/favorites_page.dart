@@ -10,7 +10,10 @@ class FavoritePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Favorites")),
+      appBar: 
+      AppBar(title: const Text("Favorites"))
+      
+      ,
       body: ValueListenableBuilder<Box<Destination>>(
         valueListenable: Hive.box<Destination>('favorites').listenable(),
         builder: (context, box, _) {

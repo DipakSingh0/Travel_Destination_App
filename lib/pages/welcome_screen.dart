@@ -70,7 +70,7 @@ Widget build(BuildContext context) {
       children: [
         const SizedBox(height: 80),
 
-        //  Fade-in anim Image
+        //  Fade-in snimImage
         FadeTransition(
           opacity: _fadeAnimation,
           child: Image.asset(

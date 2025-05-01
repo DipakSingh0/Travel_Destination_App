@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hero_anim/model/destination_model.dart';
+import 'package:hero_anim/model/profile_model.dart';
 import 'package:hero_anim/pages/welcome_screen.dart';
 import 'package:hero_anim/provider/destination_provider.dart';
 import 'package:hero_anim/provider/settings_provider.dart';
@@ -15,9 +16,12 @@ void main() async {
 
   // Register adapter
   Hive.registerAdapter(DestinationAdapter());
-
   // Open favorites box
   await Hive.openBox<Destination>('favorites');
+
+
+  Hive.registerAdapter(ProfileAdapter());
+  await Hive.openBox<Profile>('profiles');
 
 
   runApp(

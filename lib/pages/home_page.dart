@@ -15,7 +15,8 @@ class HomePage extends StatelessWidget {
     final destinations = Provider.of<DestinationProvider>(context).destinations;
 
     return Scaffold(
-      appBar: MyAppBar(
+      appBar:
+       MyAppBar(
         title: "Animation",
         actions: [
           IconButton(
