@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:hero_anim/pages/detail_page.dart';
 import 'package:hero_anim/pages/favorites_page.dart';
 import 'package:hero_anim/provider/destination_provider.dart';
@@ -17,7 +18,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar:
        MyAppBar(
-        title: "Animation",
+        title: "Travel Destination",
         actions: [
           IconButton(
             icon: const Icon(Icons.favorite),
@@ -36,46 +37,65 @@ class HomePage extends StatelessWidget {
         userEmail: "jane@example.com",
         profileImageUrl: "images/profile.jpg",
       ),
-      body: ListView.builder(
-        itemCount: destinations.length,
-        itemBuilder: (context, index) {
-          final destination = destinations[index];
-          return ListTile(
-            contentPadding: const EdgeInsets.all(10),
-            leading: Hero(
-              tag: 'destination__hero_${destination.imageUrl}',
-              // tag: destination.imageUrl,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: destination.isAsset
-                    ? Image.asset(destination.imageUrl,
-                        width: 80, height: 80, fit: BoxFit.cover)
-                    : Image.network(destination.imageUrl,
-                        width: 80, height: 80, fit: BoxFit.cover),
-              ),
-            ),
-            title: Text(destination.name),
-            subtitle: Text(destination.description),
-            trailing: Text(destination.price),
-            onTap: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (_) => DetailPage(destination: destination),
-              //   ),
-              // );
 
-               Navigator.push(
-                context,
-                CustomPageRoute(
-                  builder: (_) => DetailPage(destination: destination),
-                ),
-              );
-            
-            },
+      body: Padding(
+  padding: const EdgeInsets.all(8.0),
+  child: MasonryGridView.builder(
+    gridDelegate: const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: 2,
+    ),
+    itemCount: destinations.length,
+    itemBuilder: (context, index) {
+      final destination = destinations[index];
+      return GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            CustomPageRoute(
+              builder: (_) => DetailPage(destination: destination),
+            ),
           );
         },
-      ),
-    );
-  }
-}
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          elevation: 4,
+          margin: const EdgeInsets.all(8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Hero(
+                tag: 'destination__hero_${destination.imageUrl}',
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+                  child: destination.isAsset
+                      ? Image.asset(destination.imageUrl,
+                          fit: BoxFit.cover)
+                      : Image.network(destination.imageUrl,
+                          fit: BoxFit.cover),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  destination.name,
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Text(
+                  destination.price,
+                  style: const TextStyle(color: Colors.grey),
+                ),
+              ),
+              const SizedBox(height: 8),
+            ],
+          ),
+        ),
+      );
+    },
+  ),
+));
+  }}

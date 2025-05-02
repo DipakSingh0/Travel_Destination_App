@@ -74,7 +74,7 @@ Widget build(BuildContext context) {
         FadeTransition(
           opacity: _fadeAnimation,
           child: Image.asset(
-            'images/welcome.jpg',
+            'images/welcome.png',
             height: 200,
             width: screenWidth, 
             fit: BoxFit.contain,
