@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hero_anim/pages/profile/edit_profile.dart';
+import 'package:hero_anim/widget/profile_image_widget.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hero_anim/model/profile_model.dart';
-import 'dart:io';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -58,30 +58,26 @@ class _ProfilePageState extends State<ProfilePage> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            // Updated Profile Header with image display
-            GestureDetector(
-              onTap: () => _showEditDialog(context),
-              child: Column(
-                children: [
-                  CircleAvatar(
-                    radius: 60,
-                    backgroundImage: _getProfileImage(_profile!),
-                    child: _profile!.imagePath.isEmpty
-                        ? const Icon(Icons.person, size: 60)
-                        : null,
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    _profile!.name,
-                    style: Theme.of(context).textTheme.headlineSmall,
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    _profile!.email,
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                ],
-              ),
+            // Updated Profile Header with the new ProfileImage widget
+            Column(
+              children: [
+                ProfileImage(
+                  imagePath: _profile!.imagePath,
+                  radius: 60,
+                  onTap: () => _showEditDialog(context),
+                  showEditIcon: true,
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  _profile!.name,
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  _profile!.email,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+              ],
             ),
             const SizedBox(height: 24),
             _buildProfileItem(Icons.person, 'Name', _profile!.name),
@@ -97,17 +93,6 @@ class _ProfilePageState extends State<ProfilePage> {
         child: const Icon(Icons.edit),
       ),
     );
-  }
-
-  ImageProvider? _getProfileImage(Profile profile) {
-    if (profile.imagePath.startsWith('http')) {
-      return NetworkImage(profile.imagePath);
-    } else if (profile.imagePath.startsWith('assets/')) {
-      return AssetImage(profile.imagePath);
-    } else if (profile.imagePath.isNotEmpty) {
-      return FileImage(File(profile.imagePath));
-    }
-    return null;
   }
 
   Widget _buildProfileItem(IconData icon, String label, String value) {

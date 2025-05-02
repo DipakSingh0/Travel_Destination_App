@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hero_anim/model/destination_model.dart';
 import 'package:hero_anim/pages/detail_page.dart';
-// import 'package:hero_anim/widget/favorite_icon_widget.dart';
+import 'package:hero_anim/widget/my_appbar.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class FavoritePage extends StatelessWidget {
@@ -10,10 +10,9 @@ class FavoritePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: 
-      AppBar(title: const Text("Favorites"))
-      
-      ,
+      appBar:
+      MyAppBar(title: "Favorites"), 
+      // AppBar(title: const Text("Favorites") , centerTitle: true,),
       body: ValueListenableBuilder<Box<Destination>>(
         valueListenable: Hive.box<Destination>('favorites').listenable(),
         builder: (context, box, _) {
@@ -76,63 +75,3 @@ class FavoritePage extends StatelessWidget {
     );
   }
 }
-
-// import 'package:flutter/material.dart';
-// import 'package:hero_anim/model/destination_model.dart';
-// import 'package:hero_anim/pages/detail_page.dart';
-// // import 'package:hero_anim/provider/destination_provider.dart';
-// // import 'package:hive/hive.dart';
-// import 'package:hive_flutter/adapters.dart';
-// // import 'package:provider/provider.dart';
-
-// class FavoritePage extends StatelessWidget {
-//   const FavoritePage({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     // final favorites =
-//     //     Provider.of<DestinationProvider>(context).favoriteDestinations;
-
-//     return Scaffold(
-//         appBar: AppBar(title: const Text("Favorites")),
-//         body: ValueListenableBuilder<Box<Destination>>(
-//             valueListenable: Hive.box<Destination>('favorites').listenable(),
-//             builder: (context, box, _) {
-//               final favorites = box.values.toList();
-
-//               if (favorites.isEmpty) {
-//                 return const Center(
-//                   child: Text("No favorites yet!"),
-//                 );
-//               }
-
-//               return ListView.builder(
-//                 itemCount: favorites.length,
-//                 itemBuilder: (context, index) {
-//                   final destination = favorites[index];
-//                   return ListTile(
-//                     contentPadding: const EdgeInsets.all(10),
-//                     title: Text(destination.name),
-//                     subtitle: Text(destination.description),
-//                     leading: ClipRRect(
-//                       borderRadius: BorderRadius.circular(8),
-//                       child: destination.isAsset
-//                           ? Image.asset(destination.imageUrl,
-//                               width: 80, height: 80, fit: BoxFit.cover)
-//                           : Image.network(destination.imageUrl,
-//                               width: 80, height: 80, fit: BoxFit.cover),
-//                     ),
-//                     onTap: () {
-//                       Navigator.push(
-//                         context,
-//                         MaterialPageRoute(
-//                           builder: (_) => DetailPage(destination: destination),
-//                         ),
-//                       );
-//                     },
-//                   );
-//                 },
-//               );
-//             }));
-//   }
-// }

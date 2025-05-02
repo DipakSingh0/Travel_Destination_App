@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hero_anim/widget/profile_image_widget.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:hero_anim/model/profile_model.dart';
-import 'dart:io';
+// import 'dart:io';
 
 class EditProfileDialog extends StatefulWidget {
   final Profile initialProfile;
@@ -23,8 +24,9 @@ class _EditProfileDialogState extends State<EditProfileDialog> {
   late final TextEditingController _phoneController;
   late final TextEditingController _addressController;
   late final TextEditingController _bioController;
-  File? _pickedImage;
+  // File? _pickedImage;
   String? _imagePath;
+  bool _isProcessingImage = false;
 
   @override
   void initState() {
@@ -49,90 +51,106 @@ class _EditProfileDialogState extends State<EditProfileDialog> {
   }
 
   Future<void> _pickImage(ImageSource source) async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: source);
+    setState(() => _isProcessingImage = true);
 
-    if (pickedFile != null) {
-      setState(() {
-        _pickedImage = File(pickedFile.path);
-        _imagePath = pickedFile.path;
-      });
+    try {
+      final picker = ImagePicker();
+      final pickedFile = await picker.pickImage(
+        source: source,
+        maxWidth: 800, // Limit image size
+        maxHeight: 800,
+        imageQuality: 85, // Reduce quality slightly
+      );
+
+      if (pickedFile != null) {
+        // Add a small delay to allow the camera to fully close
+        await Future.delayed(const Duration(milliseconds: 300));
+
+        setState(() {
+          // _pickedImage = File(pickedFile.path);
+          _imagePath = pickedFile.path;
+          _isProcessingImage = false;
+        });
+      } else {
+        setState(() => _isProcessingImage = false);
+      }
+    } catch (e) {
+      setState(() => _isProcessingImage = false);
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to pick image: ${e.toString()}')));
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: const Text('Edit Profile'),
-      content: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Profile Image with Selection Options
-            GestureDetector(
-              onTap: () => _showImageSourceDialog(context),
-              child: CircleAvatar(
-                radius: 50,
-                backgroundColor: Colors.grey[200],
-                backgroundImage: _getProfileImage(),
-                child: _pickedImage == null && _imagePath == null
-                    ? const Icon(Icons.camera_alt, size: 40)
-                    : null,
+    return PopScope(
+      canPop: !_isProcessingImage, // Prevent popping while processing
+      child: AlertDialog(
+        title: const Text('Edit Profile'),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (_isProcessingImage)
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: CircularProgressIndicator(),
+                )
+              else
+                GestureDetector(
+                  onTap: () => _showImageSourceDialog(context),
+                  child: ProfileImage(
+                    imagePath: _imagePath ?? widget.initialProfile.imagePath,
+                    radius: 50,
+                    onTap: () => _showImageSourceDialog(context),
+                    showEditIcon: true,
+                  ),
+                ),
+              const SizedBox(height: 16),
+              TextButton(
+                onPressed: _isProcessingImage
+                    ? null
+                    : () => _showImageSourceDialog(context),
+                child: const Text('Change Profile Picture'),
               ),
-            ),
-            const SizedBox(height: 16),
+              TextField(
+                controller: _nameController,
+                decoration: const InputDecoration(labelText: 'Name'),
+              ),
+              TextField(
+                controller: _emailController,
+                decoration: const InputDecoration(labelText: 'Email'),
+              ),
+              TextField(
+                controller: _phoneController,
+                decoration: const InputDecoration(labelText: 'Phone'),
+              ),
+              TextField(
+                controller: _addressController,
+                decoration: const InputDecoration(labelText: 'Address'),
+              ),
+              TextField(
+                controller: _bioController,
+                decoration: const InputDecoration(labelText: 'Bio'),
+                maxLines: 3,
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          if (!_isProcessingImage) ...[
             TextButton(
-              onPressed: () => _showImageSourceDialog(context),
-              child: const Text('Change Profile Picture'),
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Cancel'),
             ),
-            TextField(
-              controller: _nameController,
-              decoration: const InputDecoration(labelText: 'Name'),
-            ),
-            TextField(
-              controller: _emailController,
-              decoration: const InputDecoration(labelText: 'Email'),
-            ),
-            TextField(
-              controller: _phoneController,
-              decoration: const InputDecoration(labelText: 'Phone'),
-            ),
-            TextField(
-              controller: _addressController,
-              decoration: const InputDecoration(labelText: 'Address'),
-            ),
-            TextField(
-              controller: _bioController,
-              decoration: const InputDecoration(labelText: 'Bio'),
-              maxLines: 3,
+            TextButton(
+              onPressed: _saveProfile,
+              child: const Text('Save'),
             ),
           ],
-        ),
+        ],
       ),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(context),
-          child: const Text('Cancel'),
-        ),
-        TextButton(
-          onPressed: _saveProfile,
-          child: const Text('Save'),
-        ),
-      ],
     );
-  }
-
-  ImageProvider? _getProfileImage() {
-    if (_pickedImage != null) {
-      return FileImage(_pickedImage!);
-    } else if (_imagePath != null) {
-      if (_imagePath!.startsWith('http')) {
-        return NetworkImage(_imagePath!);
-      } else {
-        return AssetImage(_imagePath!);
-      }
-    }
-    return null;
   }
 
   void _showImageSourceDialog(BuildContext context) {

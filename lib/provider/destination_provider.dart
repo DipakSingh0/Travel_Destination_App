@@ -4,13 +4,7 @@ import 'package:hive/hive.dart';
 
 class DestinationProvider with ChangeNotifier {
   final List<Destination> _destinations = [
-    Destination(
-      'images/Tokyo.png',
-      'Tokyo',
-      'Dazzling skyscrapers instead of lush rainforests.',
-      '\$1250',
-      true,
-    ),
+   
     Destination(
       'images/Tokyo.png',
       'Tokyo',
@@ -77,6 +71,13 @@ class DestinationProvider with ChangeNotifier {
       'Beautiful Skyscrappers',
       '\$1500',
       false,
+    ),
+     Destination(
+      'images/Tokyo.png',
+      'Tokyo',
+      'Dazzling skyscrapers instead of lush rainforests.',
+      '\$1250',
+      true,
     ),
     Destination(
       'images/maldives.webp',
