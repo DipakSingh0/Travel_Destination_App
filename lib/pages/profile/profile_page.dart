@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hero_anim/pages/profile/edit_profile.dart';
+import 'package:hero_anim/widget/my_appbar.dart';
 import 'package:hero_anim/widget/profile_image_widget.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hero_anim/model/profile_model.dart';
@@ -53,7 +54,9 @@ class _ProfilePageState extends State<ProfilePage> {
     }
 
     return Scaffold(
-      appBar: AppBar(title: const Text('My Profile')),
+      appBar:
+      MyAppBar(title: 'My Profile'),
+      //  AppBar(title: const Text('My Profile')),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
