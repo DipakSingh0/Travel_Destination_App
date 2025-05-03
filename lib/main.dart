@@ -1,13 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:hero_anim/model/destination_model.dart';
-import 'package:hero_anim/model/profile_model.dart';
-import 'package:hero_anim/pages/welcome_screen.dart';
-import 'package:hero_anim/provider/categories_provider.dart';
-import 'package:hero_anim/provider/destination_provider.dart';
-import 'package:hero_anim/provider/settings_provider.dart';
-// import 'package:hive/hive.dart';
-import 'package:hive_flutter/adapters.dart';
-import 'package:provider/provider.dart';
+import 'package:hero_anim/features/favorites/provider/favorites_provider.dart';
+import 'package:hero_anim/imports.dart';
+import 'package:hero_anim/features/welcome/welcome_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,10 +13,8 @@ void main() async {
   // Open favorites box
   await Hive.openBox<Destination>('favorites');
 
-
   Hive.registerAdapter(ProfileAdapter());
   await Hive.openBox<Profile>('profiles');
-
 
   runApp(
     MultiProvider(
@@ -35,18 +26,20 @@ void main() async {
             return provider;
           },
         ),
-        
         ChangeNotifierProvider(
           create: (_) => SettingsProvider(),
         ),
-
-        ChangeNotifierProvider(create: (_) => CategoryProvider()),
+        ChangeNotifierProvider(
+          create: (_) => CategoryProvider()),
+        ChangeNotifierProvider(
+          create: (context) =>
+              FavoritesProvider(Hive.box<Destination>('favorites')),
+        ),
       ],
       child: const MyApp(),
     ),
   );
 }
-
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
