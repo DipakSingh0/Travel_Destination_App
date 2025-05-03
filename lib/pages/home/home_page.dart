@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hero_anim/animation/page_transition_animation.dart';
-import 'package:hero_anim/pages/categories_page.dart';
+import 'package:hero_anim/pages/categories/categories_page.dart';
 import 'package:hero_anim/pages/favorites_page.dart';
 import 'package:hero_anim/pages/home/destination_grid_view.dart';
 import 'package:hero_anim/pages/profile/profile_page.dart';
@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
 
   final List<Widget> _pages = [
     const HomeContent(),
-    CategoriesPage(),
+   const CategoriesPage(),
     const FavoritePage(),
     const ProfilePage(),
   ];

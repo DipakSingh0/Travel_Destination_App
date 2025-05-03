@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hero_anim/model/destination_model.dart';
 import 'package:hero_anim/model/profile_model.dart';
 import 'package:hero_anim/pages/welcome_screen.dart';
+import 'package:hero_anim/provider/categories_provider.dart';
 import 'package:hero_anim/provider/destination_provider.dart';
 import 'package:hero_anim/provider/settings_provider.dart';
 // import 'package:hive/hive.dart';
@@ -38,6 +39,8 @@ void main() async {
         ChangeNotifierProvider(
           create: (_) => SettingsProvider(),
         ),
+
+        ChangeNotifierProvider(create: (_) => CategoryProvider()),
       ],
       child: const MyApp(),
     ),

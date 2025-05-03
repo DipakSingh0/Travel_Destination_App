@@ -8,13 +8,13 @@ class PositionAnimationWidget extends StatefulWidget {
   final Curve curve;
 
   const PositionAnimationWidget({
-    Key? key,
+    super.key,
     required this.child,
     required this.begin,
     required this.end,
     this.duration = const Duration(seconds: 1),
     this.curve = Curves.easeOut,
-  }) : super(key: key);
+  });
 
   @override
   _PositionAnimationWidgetState createState() =>

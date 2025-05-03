@@ -18,7 +18,7 @@ class WelcomeScreen extends StatelessWidget {
 
           FadeInAnimationWidget(
             child: Image.asset(
-              'images/welcome.png',
+              'assets/images/welcome.png',
               height: 200,
               width: screenWidth,
               fit: BoxFit.contain,

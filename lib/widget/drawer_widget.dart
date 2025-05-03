@@ -54,28 +54,6 @@ class DrawerWidget extends StatelessWidget {
                   radius: 45,
                   onTap: onProfileTap,
                 ),
-                // CircleAvatar(
-                //   backgroundColor: Colors.white,
-                //   child: ClipOval(
-                //     child: profileImage.startsWith('http')
-                //         ? Image.network(
-                //             profileImage,
-                //             width: 90,
-                //             height: 90,
-                //             fit: BoxFit.cover,
-                //             errorBuilder: (context, error, stackTrace) =>
-                //                 _buildDefaultIcon(context),
-                //           )
-                //         : Image.asset(
-                //             profileImage,
-                //             width: 90,
-                //             height: 90,
-                //             fit: BoxFit.cover,
-                //             errorBuilder: (context, error, stackTrace) =>
-                //                 _buildDefaultIcon(context),
-                //           ),
-                //   ),
-                // ),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [

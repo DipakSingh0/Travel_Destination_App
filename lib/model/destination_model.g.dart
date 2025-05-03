@@ -17,11 +17,11 @@ class DestinationAdapter extends TypeAdapter<Destination> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Destination(
-      fields[0] as String,
-      fields[1] as String,
-      fields[2] as String,
-      fields[3] as String,
-      fields[4] as bool,
+      imageUrl: fields[0] as String,
+      name: fields[1] as String,
+      description: fields[2] as String,
+      price: fields[3] as String,
+      isAsset: fields[4] as bool,
       isFavorite: fields[5] as bool,
     );
   }

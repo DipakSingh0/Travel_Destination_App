@@ -22,12 +22,13 @@ class Destination {
   @HiveField(5)
   bool isFavorite;
 
-  Destination(
-    this.imageUrl,
-    this.name,
-    this.description,
-    this.price,
-    this.isAsset, {
+
+  Destination({
+    required this.imageUrl,
+    required this.name,
+    required this.description,
+    required this.price,
+    required this.isAsset,
     this.isFavorite = false,
   });
 }
