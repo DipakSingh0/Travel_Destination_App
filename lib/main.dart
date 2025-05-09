@@ -1,6 +1,7 @@
+
 import 'package:hero_anim/features/favorites/provider/favorites_provider.dart';
-import 'package:hero_anim/imports.dart';
 import 'package:hero_anim/features/welcome/welcome_screen.dart';
+import 'package:hero_anim/imports.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +23,7 @@ void main() async {
         ChangeNotifierProvider(
           create: (_) {
             final provider = DestinationProvider();
-            provider.loadFavoritesStatus(); // Load favorites status
+            provider.loadFavoritesStatus();
             return provider;
           },
         ),
@@ -33,7 +34,8 @@ void main() async {
           create: (_) => CategoryProvider()),
         ChangeNotifierProvider(
           create: (context) =>
-              FavoritesProvider(Hive.box<Destination>('favorites')),
+              FavoritesProvider(
+                Hive.box<Destination>('favorites')),
         ),
       ],
       child: const MyApp(),
@@ -47,7 +49,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Hero Animation App',
+      title: 'Destination App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,

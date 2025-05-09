@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+
+import 'package:hero_anim/imports.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -13,7 +14,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.centerTitle = true,  //
     this.actions,
     this.leading,
-    this.backgroundColor = Colors.blue,
+    this.backgroundColor = blue,
   });
 
   @override

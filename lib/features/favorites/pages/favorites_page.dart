@@ -75,7 +75,11 @@ class FavoritePage extends StatelessWidget {
         builder: (context, provider, _) {
           return provider.favorites.isNotEmpty
               ? FloatingActionButton(
-                  onPressed: () => _confirmClearAll(context, provider),
+                  // onPressed: () => _confirmClearAll(context, provider),
+                  onPressed: () async {
+                    await _confirmClearAll(context , provider);
+                    // await provider.clearAllFavorites();
+                  },
                   tooltip: 'Clear All',
                   backgroundColor: Colors.red,
                   child: const Icon(Icons.delete, color: Colors.white),
@@ -86,7 +90,7 @@ class FavoritePage extends StatelessWidget {
     );
   }
 
-  void _confirmClearAll(BuildContext context, FavoritesProvider provider) {
+  Future<void> _confirmClearAll(BuildContext context, FavoritesProvider provider)async {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -112,83 +116,3 @@ class FavoritePage extends StatelessWidget {
     );
   }
 }
-
-// import 'package:hero_anim/imports.dart';
-
-// class FavoritePage extends StatelessWidget {
-//   const FavoritePage({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar:
-//       MyAppBar(title: "Favorites"), 
-      
-//       drawer: DrawerWidget(
-//         userName: "Jane Smith",
-//         userEmail: "jane@example.com",
-//         profileImageUrl: "images/profile.jpg",
-//       ),
-//       // AppBar(title: const Text("Favorites") , centerTitle: true,),
-//       body: ValueListenableBuilder<Box<Destination>>(
-//         valueListenable: Hive.box<Destination>('favorites').listenable(),
-//         builder: (context, box, _) {
-//           final favorites = box.values.toList();
-
-//           if (favorites.isEmpty) {
-//             return const Center(
-//               child: Text("No favorites yet!"),
-//             );
-//           }
-
-//           return ListView.builder(
-//             itemCount: favorites.length,
-//             itemBuilder: (context, index) {
-//               final destination = favorites[index];
-//               return ListTile(
-//                 contentPadding: const EdgeInsets.all(10),
-//                 leading: ClipRRect(
-//                   borderRadius: BorderRadius.circular(8),
-//                   child: destination.isAsset
-//                       ? Image.asset(
-//                           destination.imageUrl,
-//                           width: 80,
-//                           height: 80,
-//                           fit: BoxFit.cover,
-//                         )
-//                       : Image.network(
-//                           destination.imageUrl,
-//                           width: 80,
-//                           height: 80,
-//                           fit: BoxFit.cover,
-//                         ),
-//                 ),
-//                 title: Row(
-//                   children: [
-//                     Expanded(
-//                       child: Text(destination.name),
-//                     ),
-//                     // FavoriteIconWidget(
-//                     //   destination: destination,
-//                     //   size: 28,
-//                     // ),
-//                   ],
-//                 ),
-//                 subtitle: Text(destination.description),
-//                 trailing: Text(destination.price),
-//                 onTap: () {
-//                   Navigator.push(
-//                     context,
-//                     MaterialPageRoute(
-//                       builder: (_) => DetailPage(destination: destination),
-//                     ),
-//                   );
-//                 },
-//               );
-//             },
-//           );
-//         },
-//       ),
-//     );
-//   }
-// }

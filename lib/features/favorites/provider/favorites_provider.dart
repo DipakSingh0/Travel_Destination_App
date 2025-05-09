@@ -43,8 +43,8 @@ class FavoritesProvider with ChangeNotifier {
     }
   }
 
-  void clearAllFavorites() {
-    _favoritesBox.clear();
+  Future<void> clearAllFavorites() async {
+    await _favoritesBox.clear();
     notifyListeners();
   }
 }
