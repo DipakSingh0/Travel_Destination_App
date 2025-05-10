@@ -1,5 +1,5 @@
 import 'package:hero_anim/features/auth/sign_in/sign_in_view.dart';
-import 'package:hero_anim/features/auth/sign_in/widgets/primary_button.dart';
+import 'package:hero_anim/features/auth/widgets/primary_button.dart';
 import 'package:hero_anim/imports.dart';
 
 class WelcomeScreen extends StatelessWidget {

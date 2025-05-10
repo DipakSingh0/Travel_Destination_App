@@ -1,37 +1,34 @@
-import 'package:flutter/gestures.dart';
 import 'package:hero_anim/common/utils/assets.dart';
-import 'package:hero_anim/features/auth/sign_up/sign_up_view.dart';
-import 'package:hero_anim/features/auth/widgets/custom_text_button.dart';
 import 'package:hero_anim/features/auth/sign_in/agree_terms_card.dart';
 import 'package:hero_anim/features/auth/sign_in/auth_field.dart';
+import 'package:hero_anim/features/auth/sign_in/sign_in_view.dart';
 import 'package:hero_anim/features/auth/widgets/custom_social_button.dart';
 import 'package:hero_anim/features/auth/widgets/primary_button.dart';
-import 'package:hero_anim/features/auth/sign_in/remember_me_card.dart';
 import 'package:hero_anim/features/auth/widgets/text_with_divider.dart';
 import 'package:hero_anim/imports.dart';
 
-class SignInView extends StatefulWidget {
-  const SignInView({super.key});
+class SignUpView extends StatefulWidget {
+  const SignUpView({super.key});
 
   @override
-  State<SignInView> createState() => _SignInViewState();
+  State<SignUpView> createState() => _SignUpViewState();
 }
 
-class _SignInViewState extends State<SignInView> {
+class _SignUpViewState extends State<SignUpView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  bool isRemember = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.kWhite,
-      // appBar: AppBar(
-      //     backgroundColor: AppColors.kWhite,
-      //     elevation: 0,
-      //     leading: const BackButton(
-      //       color: AppColors.kBlue,
-      //     )),
+      appBar: AppBar(
+          backgroundColor: AppColors.kWhite,
+          elevation: 0,
+          leading: const BackButton(
+            color: AppColors.kBlue,
+          )),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.all(20),
@@ -39,25 +36,43 @@ class _SignInViewState extends State<SignInView> {
           key: _formKey,
           child: Center(
             child: Column(
+
               children: [
-                const SizedBox(height: 45),
-                const Text('Let’s Sign you in',
+                // const SizedBox(height: 25),
+
+                const Text('Create Account',
                     style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                         color: Colors.black)),
-                const SizedBox(height: 10),
-                const Text(
-                  'Connect with Us!',
-                  style: TextStyle(fontSize: 14, color: AppColors.kGrey60),
-                ),
+                const SizedBox(height: 5),
+                const Text('Just one step away',
+                    style: TextStyle(fontSize: 14, color: AppColors.kGrey60)),
                 const SizedBox(height: 30),
+                // FullName.
+                AuthField(
+                  title: 'Full Name',
+                  hintText: 'Enter your name',
+                  controller: _nameController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Name is required';
+                    } else if (!RegExp(r'^[a-zA-Z]+(?: [a-zA-Z]+)*$')
+                        .hasMatch(value.trim())) {
+                      return 'Please enter a valid name';
+                    }
+                    return null;
+                  },
+                  keyboardType: TextInputType.name,
+                  textInputAction: TextInputAction.next,
+                ),
+                const SizedBox(height: 15),
                 // Email Field.
                 AuthField(
-                  title: 'Email Address',
+                  title: 'E-mail',
                   hintText: 'Enter your email address',
                   controller: _emailController,
-                 validator: (value) {
+                  validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Email is required';
                     } else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
@@ -87,63 +102,19 @@ class _SignInViewState extends State<SignInView> {
                   keyboardType: TextInputType.visiblePassword,
                   textInputAction: TextInputAction.done,
                 ),
-                const SizedBox(height: 5),
-                Row(
-                  children: [
-                    RememberMeCard(
-                      onChanged: (value) {
-                        setState(() {
-                          isRemember = value;
-                        });
-                      },
-                    ),
-                    const Spacer(),
-                    CustomTextButton(
-                      onPressed: () {},
-                      text: 'Forget Password',
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 15),
+                const SizedBox(height: 30),
                 PrimaryButton(
                   onTap: () {
                     if (_formKey.currentState!.validate()) {
                         Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => HomePage()),
+                        MaterialPageRoute(builder: (context) => SignInView()),
                       );
                     }
                   },
-                  text: 'Sign In',
+                  text: 'Create An Account',
                 ),
-                const SizedBox(height: 20),
-                RichText(
-                  text: TextSpan(
-                    text: 'Don’t have an account? ',
-                    style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black),
-                    children: [
-                      TextSpan(
-                        text: 'Sign Up',
-                        recognizer: TapGestureRecognizer()..onTap = () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SignUpView()),
-                            );
-                        },
-                        style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
-                            color: AppColors.kBlue),
-                      ),
-                    ],
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 30),
                 const TextWithDivider(),
                 const SizedBox(height: 20),
                 Row(
@@ -173,3 +144,5 @@ class _SignInViewState extends State<SignInView> {
     );
   }
 }
+
+
