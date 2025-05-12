@@ -1,5 +1,5 @@
 import 'package:hero_anim/features/auth/sign_in/sign_in_view.dart';
-import 'package:hero_anim/features/auth/widgets/primary_button.dart';
+import 'package:hero_anim/common/widgets/primary_button.dart';
 import 'package:hero_anim/imports.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -13,8 +13,7 @@ class WelcomeScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          const SizedBox(height: 80),
-
+          const SizedBox(height: 120),
           FadeInAnimationWidget(
             child: Image.asset(
               'assets/images/welcome.png',
@@ -23,9 +22,7 @@ class WelcomeScreen extends StatelessWidget {
               fit: BoxFit.contain,
             ),
           ),
-
-          const SizedBox(height: 40),
-
+          const SizedBox(height: 100),
           Expanded(
             child: Center(
               child: Stack(
@@ -75,16 +72,18 @@ class WelcomeScreen extends StatelessWidget {
                       ),
                     ),
                   ),
+                  
                 ],
               ),
             ),
           ),
-
-          
-            FadeInAnimationWidget(
-            duration: const Duration(seconds: 2),
-            child: Padding(
-              padding: const EdgeInsets.all(60),
+          const SizedBox(
+            height: 60,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(40),
+            child: FadeInAnimationWidget(
+              duration: const Duration(seconds: 2),
               child: PrimaryButton(
                 onTap: () {
                   Navigator.push(
@@ -96,33 +95,10 @@ class WelcomeScreen extends StatelessWidget {
               ),
             ),
           ),
-
-          // Animated Button
-          // FadeInAnimationWidget(
-          //   duration: const Duration(seconds: 2),
-          //   child: Padding(
-          //     padding: const EdgeInsets.only(bottom: 40),
-          //     child: ElevatedButton(
-          //       onPressed: () {
-          //         Navigator.of(context).pushReplacement(
-          //           MaterialPageRoute(builder: (_) => const SignInView()),
-          //         );
-          //       },
-          //       style: ElevatedButton.styleFrom(
-          //         backgroundColor: AppColors.kBlue,
-          //         padding:
-          //             const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
-          //         shape: RoundedRectangleBorder(
-          //           borderRadius: BorderRadius.circular(12),
-          //         ),
-          //       ),
-          //       child: const Text(
-          //         "Get Started",
-          //         style: TextStyle(fontSize: 18, color: Colors.white),
-          //       ),
-          //     ),
-          //   ),
+          // const SizedBox(
+          //   height: 50,
           // ),
+         
         ],
       ),
     );

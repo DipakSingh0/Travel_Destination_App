@@ -50,6 +50,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Destination App',
       debugShowCheckedModeBanner: false,
+      checkerboardOffscreenLayers: true, // this will show animation in debug
       theme: ThemeData(
         primarySwatch: Colors.blue,
         useMaterial3: false,

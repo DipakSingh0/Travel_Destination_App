@@ -40,12 +40,21 @@ class DrawerWidget extends StatelessWidget {
                 ),
                 accountEmail: Text(userEmail),
                 currentAccountPicture:
-                    // In your DrawerWidget, replace the currentAccountPicture with:
-                    ProfileImage(
-                  imagePath: profileImage,
-                  radius: 45,
-                  onTap: onProfileTap,
-                ),
+                    // creating animation between pages with hero widget tag-profile_image
+                    // adding this to drawer too where we want animation
+                // Hero(
+                //   tag: 'profile_image',
+                //   child: ProfileImage(
+                //     imagePath: profileImage,
+                //     radius: 45,
+                //     onTap: onProfileTap,
+                //   ),
+                // ),
+                 ProfileImage(
+                   imagePath: profileImage,
+                   radius: 45,
+                   onTap: onProfileTap,
+                 ),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
@@ -66,7 +75,7 @@ class DrawerWidget extends StatelessWidget {
             leading: const Icon(Icons.person),
             title: const Text('Profile'),
             onTap: () {
-              // Navigator.pop(context); // Close drawer
+              // Navigator.pop(context); // Close drawer first
               Navigator.push(
                   context,
                   CustomPageRoute(

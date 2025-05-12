@@ -24,21 +24,12 @@ class DetailPage extends StatelessWidget {
           children: [
             // image display
             Hero(
-              tag: categoryName != null
-                  ? 'category_${categoryName}_hero_$itemName'
-                  : 'destination__hero_${destination.imageUrl}',
-              child: destination.isAsset
-                  ? Image.asset(
-                      destination.imageUrl,
-                      height: 250,
-                      fit: BoxFit.cover,
-                    )
-                  : Image.network(
-                      destination.imageUrl,
-                      height: 250,
-                      fit: BoxFit.cover,
-                    ),
-            ),
+              tag: 'destination_hero_${destination.imageUrl}',
+                child: Image.asset(
+                  destination.imageUrl,
+                  height: 250,
+                  fit: BoxFit.cover,
+                )),
             const SizedBox(height: 16),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),

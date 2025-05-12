@@ -49,18 +49,15 @@ class DestinationGridView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Hero(
-                    tag: 'destination__hero_${destination.imageUrl}',
+                    tag: 'destination_hero_${destination.imageUrl}',
                     child: ClipRRect(
                       borderRadius: borderRadius,
-                      child: destination.isAsset
-                          ? Image.asset(
+                      child: 
+                          Image.asset(
                               destination.imageUrl,
                               fit: BoxFit.cover,
                             )
-                          : Image.network(
-                              destination.imageUrl,
-                              fit: BoxFit.cover,
-                            ),
+                         
                     ),
                   ),
                   Padding(

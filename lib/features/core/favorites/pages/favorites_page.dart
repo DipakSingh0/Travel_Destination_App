@@ -31,19 +31,16 @@ class FavoritePage extends StatelessWidget {
                 contentPadding: const EdgeInsets.all(10),
                 leading: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
-                  child: destination.isAsset
-                      ? Image.asset(
-                          destination.imageUrl,
-                          width: 80,
-                          height: 80,
-                          fit: BoxFit.cover,
-                        )
-                      : Image.network(
-                          destination.imageUrl,
-                          width: 80,
-                          height: 80,
-                          fit: BoxFit.cover,
-                        ),
+                  child: Hero(
+                   tag: 'destination_hero_${destination.imageUrl}',
+                    child: Image.asset(
+                            destination.imageUrl,
+                            width: 80,
+                            height: 80,
+                            fit: BoxFit.cover,
+                          ),
+                  )
+                      
                 ),
                 title: Text(destination.name),
                 subtitle: Text(destination.description),

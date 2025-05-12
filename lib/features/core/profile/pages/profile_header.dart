@@ -15,13 +15,13 @@ class ProfileHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        // animation with hero widget seen in profile page 
+        // add hero widget with saem tag
         Hero(
           tag: 'profile_image',
           child: CircleAvatar(
             radius: 60,
-            backgroundImage: profile.imagePath.startsWith('http')
-                ? NetworkImage(profile.imagePath) as ImageProvider
-                : AssetImage(profile.imagePath),
+            backgroundImage: AssetImage(profile.imagePath),
           ),
         ),
         const SizedBox(height: 24),

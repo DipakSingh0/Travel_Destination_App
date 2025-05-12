@@ -28,7 +28,7 @@ class CategoryExpansionTile extends StatelessWidget {
           title: item.name,
           subtitle: '${category.name} destination',
           imageUrl: item.imageUrl,
-          heroTag: 'category_${category.name}_hero_${item.name}',
+          heroTag: 'destination_hero_${item.imageUrl}',
           onTap: () => onItemTap?.call(category.name, item.name),
         );
       }).toList(),

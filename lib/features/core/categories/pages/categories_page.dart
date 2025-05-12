@@ -40,9 +40,9 @@ class CategoriesPage extends StatelessWidget {
     return Scaffold(
       appBar: MyAppBar(title: "Explore Categories"),
       drawer: DrawerWidget(
-        userName: "Jane Smith",
-        userEmail: "jane@example.com",
-        profileImageUrl: "images/profile.jpg",
+        userName: "Robert Downey Jr.",
+        userEmail: "rdj@marvel.com",
+        profileImageUrl: "assets/images/profile.jpg",
       ),
       body: Consumer<CategoryProvider>(
         builder: (context, categoryProvider, child) {
