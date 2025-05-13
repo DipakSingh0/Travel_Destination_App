@@ -39,12 +39,14 @@ flutter:
   assets:
     # - assets
     - assets/images/
+    - assets/images/profile.jpg
     - assets/images/city/
     - assets/images/country/
     - assets/images/iceland/
     - assets/images/lake/
     - assets/images/mountain/
     - assets/images/logos/
+
 
 
 
