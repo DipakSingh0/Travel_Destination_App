@@ -8,6 +8,7 @@ class PrimaryButton extends StatefulWidget {
   final double? borderRadius;
   final double? fontSize;
   final Color? color;
+  final Color? textColor;
   const PrimaryButton({
     required this.onTap,
     required this.text,
@@ -16,7 +17,8 @@ class PrimaryButton extends StatefulWidget {
     this.borderRadius,
     this.fontSize,
     this.color,
-    super.key,
+    this.textColor,
+    super.key, 
   });
 
   @override
@@ -78,7 +80,10 @@ class _PrimaryButtonState extends State<PrimaryButton>
             child: Text(
               widget.text,
               style: TextStyle(
-                  color: widget.color == null ? AppColors.kWhite : Colors.black,
+                  // color: widget.color == null ? AppColors.kWhite : Colors.black,
+                   color: widget.textColor ??
+                      (widget.color == null ? AppColors.kWhite : Colors.black),
+                  // color: textColor,
                   fontSize: widget.fontSize ?? 16,
                   fontWeight: FontWeight.w600),
             ),
