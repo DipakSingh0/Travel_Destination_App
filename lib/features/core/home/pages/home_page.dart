@@ -20,71 +20,89 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _currentIndex == 0
-          ? MyAppBar(
-              title: "Travel Destination",
-              actions: [
-                IconButton(
-                  icon: const Icon(Icons.person),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      PageTransitionAnimation(
-                          builder: (_) => const ProfilePage()),
-                    );
-                  },
-                )
-              ],
-            )
-          : null,
-      drawer: _currentIndex == 0
-          ? DrawerWidget(
-        userName: "Robert Downey Jr.",
-        userEmail: "rdj@marvel.com",
-        profileImageUrl: "assets/images/profile.jpg",
-      )
-          : null,
-      body: 
-      // AnimatedSwitcher(
-      //   duration: const Duration(milliseconds: 900),
-      //   transitionBuilder: (Widget child, Animation<double> animation) {
-      //     final slideAnimation = Tween<Offset>(
-      //       begin: const Offset(0.5, 0.0),
-      //       end: Offset.zero,
-      //     ).animate(CurvedAnimation(
-      //       parent: animation,
-      //       curve: Curves.easeInOutQuart,
-      //     ));
+        appBar: _currentIndex == 0
+            ? MyAppBar(
+                title: "Travel Destination",
+                actions: [
+                  // IconButton(
+                  //   icon: const Icon(Icons.person),
+                  //   onPressed: () {
+                  //     Navigator.push(
+                  //       context,
+                  //       PageTransitionAnimation(
+                  //           builder: (_) => const ProfilePage()),
+                  //     );
+                  //   },
+                  // )
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProfilePage()));
+                      },
+                      child: Hero(
+                        tag: 'profile_image',
+                        child: CircleAvatar(
+                          radius: 20, // Smaller radius for app bar
+                          backgroundImage: AssetImage(AppAssets.kProfile),
+                          // child: Image.asset(AppAssets.kProfile)
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            : null,
+        drawer: _currentIndex == 0
+            ? DrawerWidget(
+                userName: "Robert Downey Jr.",
+                userEmail: "rdj@marvel.com",
+                profileImageUrl: "assets/images/profile.jpg",
+              )
+            : null,
+        body:
+            // AnimatedSwitcher(
+            //   duration: const Duration(milliseconds: 900),
+            //   transitionBuilder: (Widget child, Animation<double> animation) {
+            //     final slideAnimation = Tween<Offset>(
+            //       begin: const Offset(0.5, 0.0),
+            //       end: Offset.zero,
+            //     ).animate(CurvedAnimation(
+            //       parent: animation,
+            //       curve: Curves.easeInOutQuart,
+            //     ));
 
-      //     final fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      //       CurvedAnimation(
-      //         parent: animation,
-      //         curve: Curves.easeIn,
-      //       ),
-      //     );
+            //     final fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+            //       CurvedAnimation(
+            //         parent: animation,
+            //         curve: Curves.easeIn,
+            //       ),
+            //     );
 
-      //     return SlideTransition(
-      //       position: slideAnimation,
-      //       child: FadeTransition(
-      //         opacity: fadeAnimation,
-      //         child: child,
-      //       ),
-      //     );
-      //   },
-      //   child: 
-        KeyedSubtree(
+            //     return SlideTransition(
+            //       position: slideAnimation,
+            //       child: FadeTransition(
+            //         opacity: fadeAnimation,
+            //         child: child,
+            //       ),
+            //     );
+            //   },
+            //   child:
+            KeyedSubtree(
           key: ValueKey<int>(_currentIndex),
           child: _pages[_currentIndex],
         ),
-      
-      bottomNavigationBar: CustomBottomNavBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-      ));
+        bottomNavigationBar: CustomBottomNavBar(
+          currentIndex: _currentIndex,
+          onTap: (index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+        ));
   }
 }
 

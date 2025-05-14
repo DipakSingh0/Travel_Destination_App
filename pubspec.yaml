@@ -42,7 +42,7 @@ flutter:
   assets:
     # - assets
     - assets/images/
-    - assets/images/profile.jpg
+    - assets/images/profile.webp
     - assets/images/city/
     - assets/images/country/
     - assets/images/iceland/

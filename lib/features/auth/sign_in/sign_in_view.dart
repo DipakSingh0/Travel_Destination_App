@@ -1,11 +1,9 @@
 import 'package:flutter/gestures.dart';
-import 'package:hero_anim/common/utils/assets.dart';
 import 'package:hero_anim/features/auth/sign_up/sign_up_view.dart';
 import 'package:hero_anim/features/auth/widgets/custom_text_button.dart';
 import 'package:hero_anim/features/auth/sign_in/agree_terms_card.dart';
 import 'package:hero_anim/features/auth/sign_in/auth_field.dart';
 import 'package:hero_anim/features/auth/widgets/custom_social_button.dart';
-import 'package:hero_anim/common/widgets/primary_button.dart';
 import 'package:hero_anim/features/auth/sign_in/remember_me_card.dart';
 import 'package:hero_anim/features/auth/widgets/text_with_divider.dart';
 import 'package:hero_anim/imports.dart';
@@ -108,9 +106,11 @@ class _SignInViewState extends State<SignInView> {
                 PrimaryButton(
                   onTap: () {
                     if (_formKey.currentState!.validate()) {
-                        Navigator.push(
+                        Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(builder: (context) => HomePage()),
+                        (Route<dynamic> route) =>
+                            false, // This condition removes all routes below the new one.
                       );
                     }
                   },

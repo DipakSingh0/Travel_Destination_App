@@ -40,8 +40,8 @@ class DrawerWidget extends StatelessWidget {
                 ),
                 accountEmail: Text(userEmail),
                 currentAccountPicture:
-                    // creating animation between pages with hero widget tag-profile_image
-                    // adding this to drawer too where we want animation
+                // creating animation between pages with hero widget tag-profile_image
+                // adding this to drawer too where we want animation
                 // Hero(
                 //   tag: 'profile_image',
                 //   child: ProfileImage(

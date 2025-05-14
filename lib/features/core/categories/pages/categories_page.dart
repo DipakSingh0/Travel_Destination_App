@@ -4,7 +4,7 @@ import 'package:hero_anim/features/core/home/widgets/drawer_widget.dart';
 import 'package:hero_anim/features/core/home/widgets/my_appbar.dart';
 import 'package:hero_anim/features/core/home/model/destination_model.dart';
 import 'package:hero_anim/features/core/categories/pages/categories_expansion_tile.dart';
-import 'package:hero_anim/features/core/details/detail_page.dart';
+import 'package:hero_anim/features/core/details/page/detail_page.dart';
 import 'package:hero_anim/features/core/categories/provider/categories_provider.dart';
 import 'package:provider/provider.dart';
 

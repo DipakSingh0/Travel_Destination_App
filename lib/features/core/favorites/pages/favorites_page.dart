@@ -1,6 +1,3 @@
-// features/favorites/pages/favorite_page.dart
-import 'package:hero_anim/features/core/favorites/widgets/favorite_icon_widget.dart';
-import 'package:hero_anim/features/core/favorites/provider/favorites_provider.dart';
 import 'package:hero_anim/imports.dart';
 
 class FavoritePage extends StatelessWidget {

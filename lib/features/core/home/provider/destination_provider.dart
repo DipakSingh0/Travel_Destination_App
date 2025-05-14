@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:hero_anim/common/utils/assets.dart';
 import 'package:hero_anim/features/core/home/model/destination_model.dart';
 import 'package:hive/hive.dart';
 
 class DestinationProvider with ChangeNotifier {
   final List<Destination> _destinations = [
     Destination(
-      imageUrl: 'assets/images/city/Tokyo.png',
+      imageUrl: AppAssets.kTokyo,
       name: 'Tokyo',
       description:
           '''Tokyo, the vibrant capital of Japan, is a dazzling metropolis where ancient traditions harmoniously coexist with futuristic innovations. From the serene Meiji Shrine and the historic Asakusa district with its famed Senso-ji Temple, to the neon-lit skyscrapers of Shinjuku and Shibuya's iconic scramble crossing, Tokyo offers an unparalleled urban experience. The city is a true feast for the senses, constantly evolving yet deeply rooted in its rich cultural heritage.
@@ -17,7 +18,7 @@ Whether you're seeking cutting-edge technology, traditional arts, vibrant nightl
       isAsset: true,
     ),
     Destination(
-      imageUrl: 'assets/images/lake/tilicho.webp',
+      imageUrl: AppAssets.kTilicho,
       name: 'Tilicho Lake',
       description:
           '''Nestled in the Annapurna mountain range of Nepal, Tilicho Lake holds the distinction of being one of the highest lakes in the world, sitting at an impressive altitude of 4,919 meters (16,138 feet). This breathtaking glacial lake is renowned for its stunning turquoise waters, which reflect the majestic snow-capped peaks that surround it, including Tilicho Peak and Annapurna III. The journey to Tilicho is as spectacular as the destination itself.
@@ -30,8 +31,8 @@ Reaching Tilicho Lake offers a moment of unparalleled tranquility and accomplish
     ),
     Destination(
       imageUrl:
-          'assets/images/country/nepal.png', // Image path suggests Nepal, name is Mt.Everest
-      name: 'Mt.Everest',
+         AppAssets.kEverest, 
+      name: 'Mt. Everest',
       description:
           '''Mount Everest, known as Sagarmatha in Nepali and Chomolungma in Tibetan, stands as the Earth's highest mountain above sea level, soaring to an awe-inspiring 8,848.86 meters (29,031.7 feet). Located in the Mahalangur Himal sub-range of the Himalayas, its majestic peak is a symbol of ultimate adventure and human endurance, drawing climbers and trekkers from every corner of the globe to witness its grandeur.
 
@@ -43,7 +44,7 @@ For mountaineers, conquering Everest is a lifelong dream, a formidable test of s
     ),
     Destination(
       imageUrl:
-          'assets/images/mountain/everest.webp', // Image path suggests Everest, name is Nepal
+          AppAssets.kNepal, // Image path suggests Everest, name is Nepal
       name: 'Nepal',
       description:
           '''Nepal, a landlocked nation nestled in the heart of the Himalayas, is a country of breathtaking natural beauty and profound cultural richness. From the towering snow-capped peaks of the world's highest mountains, including Mount Everest, to lush subtropical forests and ancient cities teeming with history, Nepal offers an astonishing diversity of landscapes and experiences. It's a place where spirituality and adventure intertwine seamlessly.
@@ -55,7 +56,7 @@ Beyond its cultural treasures, Nepal is an adventurer's paradise. Whether it's t
       isAsset: true,
     ),
     Destination(
-      imageUrl: 'assets/images/city/newyork.webp',
+      imageUrl: AppAssets.kNewyork,
       name: 'Newyork',
       description:
           '''New York City, often called "The City That Never Sleeps," is a global powerhouse of culture, finance, fashion, and art. Its iconic skyline, dominated by architectural marvels like the Empire State Building, Chrysler Building, and One World Trade Center, is instantly recognizable. From the bustling streets of Times Square to the serene pathways of Central Park, NYC offers an electrifying blend of energy and diversity.
@@ -67,7 +68,7 @@ New York is a city of dreams and ambitions, a place where innovation thrives and
       isAsset: true,
     ),
     Destination(
-      imageUrl: 'assets/images/city/hongkong.webp',
+      imageUrl: AppAssets.kKongkong,
       name: 'HongKong',
       description:
           '''Hong Kong, a vibrant Special Administrative Region of China, is a captivating destination renowned for its stunning skyscraper-studded skyline, deep natural harbor, and a unique fusion of Eastern and Western cultures. Victoria Harbour provides a dramatic backdrop to this bustling metropolis, especially during the nightly "A Symphony of Lights" show. The city is a dynamic financial hub, a shopper's paradise, and a culinary mecca.
@@ -79,7 +80,7 @@ Hong Kong's culinary scene is legendary, offering everything from dim sum and st
       isAsset: true,
     ),
     Destination(
-      imageUrl: 'assets/images/iceland/maldives.webp',
+      imageUrl: AppAssets.kMaldives,
       name: 'Maldives',
       description:
           '''The Maldives, an archipelago of over a thousand coral islands scattered across the Indian Ocean, is the epitome of a tropical paradise. Famed for its pristine white-sand beaches, crystal-clear turquoise lagoons, and luxurious overwater bungalows, it's a dream destination for honeymooners, divers, and anyone seeking ultimate relaxation and natural beauty. Each resort island offers a secluded haven of tranquility and indulgence.
@@ -91,7 +92,7 @@ The Maldivian culture, though often overshadowed by its resort experiences, is r
       isAsset: true,
     ),
     Destination(
-      imageUrl: 'assets/images/iceland/Fiji.png',
+      imageUrl: AppAssets.kFiji,
       name: 'Fiji',
       description:
           '''Fiji, an archipelago of more than 300 islands in the South Pacific, is a tropical dream renowned for its dazzling white-sand beaches, crystal-clear turquoise waters, and vibrant coral reefs. Known as the "Soft Coral Capital of the World," Fiji offers unparalleled snorkeling and diving experiences, with an abundance of colorful marine life and spectacular underwater seascapes. The islands are a sanctuary for those seeking sun, sand, and adventure.
@@ -104,7 +105,7 @@ Beyond its stunning beaches and underwater wonders, Fiji's lush interiors offer 
     ),
     Destination(
       imageUrl:
-          'assets/images/country/nepal.png', // Same image as 'Mt.Everest' entry, but name is 'Nepal'
+          AppAssets.kNepal, // Same image as 'Mt.Everest' entry, but name is 'Nepal'
       name: 'Nepal',
       description:
           '''Nepal, a landlocked nation nestled in the heart of the Himalayas, is a country of breathtaking natural beauty and profound cultural richness. From the towering snow-capped peaks of the world's highest mountains, including Mount Everest, to lush subtropical forests and ancient cities teeming with history, Nepal offers an astonishing diversity of landscapes and experiences. It's a place where spirituality and adventure intertwine seamlessly.
@@ -116,7 +117,7 @@ Beyond its cultural treasures, Nepal is an adventurer's paradise. Whether it's t
       isAsset: true,
     ),
     Destination(
-      imageUrl: 'assets/images/lake/tilicho.webp',
+      imageUrl: AppAssets.kTilicho,
       name: 'Tilicho Lake',
       description:
           '''Nestled in the Annapurna mountain range of Nepal, Tilicho Lake holds the distinction of being one of the highest lakes in the world, sitting at an impressive altitude of 4,919 meters (16,138 feet). This breathtaking glacial lake is renowned for its stunning turquoise waters, which reflect the majestic snow-capped peaks that surround it, including Tilicho Peak and Annapurna III. The journey to Tilicho is as spectacular as the destination itself.
@@ -128,7 +129,7 @@ Reaching Tilicho Lake offers a moment of unparalleled tranquility and accomplish
       isAsset: true,
     ),
     Destination(
-      imageUrl: 'assets/images/city/Tokyo.png',
+      imageUrl: AppAssets.kTokyo,
       name: 'Tokyo',
       description:
           '''Tokyo, Japan's bustling capital, masterfully blends the ultramodern with the traditional, from neon-illuminated skyscrapers to historic temples. This megacity is a hub of innovation, setting trends in fashion, technology, and cuisine while meticulously preserving its ancient cultural roots. The sheer scale and energy of Tokyo are mesmerizing, offering endless exploration opportunities for every type of traveler.
@@ -140,7 +141,7 @@ Beyond its iconic landmarks like the Tokyo Skytree and the Imperial Palace, Toky
       isAsset: true,
     ),
     Destination(
-      imageUrl: 'assets/images/iceland/maldives.webp',
+      imageUrl: AppAssets.kMaldives,
       name: 'Maldives',
       description:
           '''The Maldives, a stunning chain of atolls in the Indian Ocean, beckons with its idyllic vision of paradise: powdery white sands, swaying palm trees, and impossibly clear turquoise waters. This tropical haven is synonymous with luxury and tranquility, offering exclusive resort experiences where overwater villas provide direct access to the vibrant marine life below. It's the perfect escape for romance, relaxation, and reconnecting with nature.
@@ -149,6 +150,18 @@ Explore the breathtaking coral reefs that make the Maldives a world-class destin
 
 Beyond the luxurious resorts, the Maldivian culture offers a unique island charm. Discover local traditions, savor fresh seafood infused with regional spices, and enjoy the laid-back pace of island life. The Maldives is more than just a picturesque postcard; it's an immersive experience that rejuvenates the senses and creates cherished memories of sun-drenched days and starlit nights.''', // Second Maldives entry, slightly different focus
       price: '\$1500',
+      isAsset: true,
+    ),
+    Destination(
+      imageUrl: AppAssets.kKili,
+      name: 'Mt.Kilimanjaro',
+      description:
+          '''The Maldives, a stunning chain of atolls in the Indian Ocean, beckons with its idyllic vision of paradise: powdery white sands, swaying palm trees, and impossibly clear turquoise waters. This tropical haven is synonymous with luxury and tranquility, offering exclusive resort experiences where overwater villas provide direct access to the vibrant marine life below. It's the perfect escape for romance, relaxation, and reconnecting with nature.
+
+Explore the breathtaking coral reefs that make the Maldives a world-class destination for snorkeling and diving. Swim alongside graceful manta rays, gentle whale sharks, and a kaleidoscope of colorful fish in the warm, inviting waters. For those seeking adventure above the waves, activities like sunset cruises, dolphin watching, and various watersports offer thrilling ways to experience the archipelago's natural splendor.
+
+Beyond the luxurious resorts, the Maldivian culture offers a unique island charm. Discover local traditions, savor fresh seafood infused with regional spices, and enjoy the laid-back pace of island life. The Maldives is more than just a picturesque postcard; it's an immersive experience that rejuvenates the senses and creates cherished memories of sun-drenched days and starlit nights.''', // Second Maldives entry, slightly different focus
+      price: '\$1250',
       isAsset: true,
     ),
   ];

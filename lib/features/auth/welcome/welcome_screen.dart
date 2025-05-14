@@ -1,5 +1,4 @@
 import 'package:hero_anim/features/auth/sign_in/sign_in_view.dart';
-import 'package:hero_anim/common/widgets/primary_button.dart';
 import 'package:hero_anim/imports.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -16,7 +15,7 @@ class WelcomeScreen extends StatelessWidget {
           const SizedBox(height: 120),
           FadeInAnimationWidget(
             child: Image.asset(
-              'assets/images/welcome.png',
+              AppAssets.kWelcome,
               height: 200,
               width: screenWidth,
               fit: BoxFit.contain,
@@ -72,7 +71,6 @@ class WelcomeScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  
                 ],
               ),
             ),
@@ -80,25 +78,38 @@ class WelcomeScreen extends StatelessWidget {
           const SizedBox(
             height: 60,
           ),
-          Padding(
-            padding: const EdgeInsets.all(40),
-            child: FadeInAnimationWidget(
-              duration: const Duration(seconds: 2),
-              child: PrimaryButton(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SignInView()),
-                  );
-                },
-                text: "Let's Start",
-              ),
+          // Padding(
+          //   padding: const EdgeInsets.all(40),
+          //   child: FadeInAnimationWidget(
+          //     duration: const Duration(seconds: 2),
+          //     child: PrimaryButton(
+          //       onTap: () {
+          //         Navigator.push(
+          //           context,
+          //           MaterialPageRoute(builder: (context) => SignInView()),
+          //         );
+          //       },
+          //       text: "Let's Start",
+          //     ),
+          //   ),
+          // ),
+          PositionAnimationWidget(
+            begin: const Offset(0.0,1.2), 
+            end: const Offset(0.0, -0.5),
+
+            child: PrimaryButton(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SignInView()),
+                );
+              },
+              text: "Let's Start",
             ),
           ),
           // const SizedBox(
           //   height: 50,
           // ),
-         
         ],
       ),
     );

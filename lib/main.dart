@@ -1,4 +1,4 @@
-import 'package:hero_anim/features/core/favorites/provider/favorites_provider.dart';
+import 'package:hero_anim/features/auth/welcome/welcome_screen.dart';
 import 'package:hero_anim/imports.dart';
 
 void main() async {
@@ -54,8 +54,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         useMaterial3: false,
       ),
-      home: HomePage(),
-      // home: const WelcomeScreen(),
+      // home: HomePage(),
+      home: const WelcomeScreen(),
       // home: LoginScreen(),
       // home: SignInView()
     );

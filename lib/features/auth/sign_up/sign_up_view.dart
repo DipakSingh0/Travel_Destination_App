@@ -1,9 +1,7 @@
-import 'package:hero_anim/common/utils/assets.dart';
 import 'package:hero_anim/features/auth/sign_in/agree_terms_card.dart';
 import 'package:hero_anim/features/auth/sign_in/auth_field.dart';
 import 'package:hero_anim/features/auth/sign_in/sign_in_view.dart';
 import 'package:hero_anim/features/auth/widgets/custom_social_button.dart';
-import 'package:hero_anim/common/widgets/primary_button.dart';
 import 'package:hero_anim/features/auth/widgets/text_with_divider.dart';
 import 'package:hero_anim/imports.dart';
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hero_anim/common/utils/assets.dart';
 import 'package:hero_anim/features/core/profile/model/profile_model.dart';
 
 class ProfileHeader extends StatelessWidget {
@@ -15,13 +16,15 @@ class ProfileHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // animation with hero widget seen in profile page 
+        // animation with hero widget seen in profile page
         // add hero widget with saem tag
         Hero(
           tag: 'profile_image',
           child: CircleAvatar(
             radius: 60,
-            backgroundImage: AssetImage(profile.imagePath),
+            backgroundImage: profile.imagePath.isNotEmpty
+                ? AssetImage(profile.imagePath) 
+                : AssetImage(AppAssets.kProfile), 
           ),
         ),
         const SizedBox(height: 24),

@@ -1,4 +1,3 @@
-import 'package:hero_anim/common/widgets/primary_button.dart';
 import 'package:hero_anim/imports.dart';
 
 class DetailActions extends StatelessWidget {
@@ -21,13 +20,20 @@ class DetailActions extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
         child: Row(
           children: [
-            Container(
+              Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 color: Colors.grey[200],
                 shape: BoxShape.circle,
               ),
-              child: _buildFavoriteButton(context),
+              child: Consumer<FavoritesProvider>(
+                builder: (context, favoritesProvider, child) {
+                  return FavoriteIconWidget(
+                    destination: destination,
+                    size: 28,
+                  );
+                },
+              ),
             ),
             const SizedBox(width: 16),
             Expanded(
@@ -49,51 +55,5 @@ class DetailActions extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Widget _buildFavoriteButton(BuildContext context) {
-    if (categoryName != null && itemName != null) {
-      return Consumer<CategoryProvider>(
-        builder: (context, provider, _) {
-          return IconButton(
-            padding: EdgeInsets.zero,
-            constraints: const BoxConstraints(),
-            icon: AnimatedSwitcher(
-              duration: const Duration(milliseconds: 300),
-              transitionBuilder: (child, animation) =>
-                  ScaleTransition(scale: animation, child: child),
-              child: Icon(
-                destination.isFavorite ? Icons.favorite : Icons.favorite_border,
-                key: ValueKey<bool>(destination.isFavorite),
-                color: destination.isFavorite ? Colors.red : Colors.grey,
-                size: 28,
-              ),
-            ),
-            onPressed: () => provider.toggleFavorite(categoryName!, itemName!),
-          );
-        },
-      );
-    } else {
-      return Consumer<DestinationProvider>(
-        builder: (context, provider, _) {
-          return IconButton(
-            padding: EdgeInsets.zero,
-            constraints: const BoxConstraints(),
-            icon: AnimatedSwitcher(
-              duration: const Duration(milliseconds: 300),
-              transitionBuilder: (child, animation) =>
-                  ScaleTransition(scale: animation, child: child),
-              child: Icon(
-                destination.isFavorite ? Icons.favorite : Icons.favorite_border,
-                key: ValueKey<bool>(destination.isFavorite),
-                color: destination.isFavorite ? Colors.red : Colors.grey,
-                size: 28,
-              ),
-            ),
-            onPressed: () => provider.toggleFavorite(destination),
-          );
-        },
-      );
-    }
   }
 }
