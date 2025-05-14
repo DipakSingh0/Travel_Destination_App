@@ -1,8 +1,20 @@
-import 'package:hero_anim/features/auth/welcome/welcome_screen.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:hero_anim/common/utils/consts.dart';
+import 'package:hero_anim/features/auth/view/welcome/welcome_screen.dart';
 import 'package:hero_anim/imports.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  //stripe payment integation
+  // Stripe.publishableKey = stripePublishableKey;
+
+  try {
+    Stripe.publishableKey = stripePublishableKey;
+    await Stripe.instance.applySettings();
+  } catch (e) {
+    debugPrint('Stripe initialization failed: $e');
+  }
 
   // Initialize Hive
   await Hive.initFlutter();
