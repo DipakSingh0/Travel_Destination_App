@@ -6,9 +6,6 @@ import 'package:hero_anim/imports.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  //stripe payment integation
-  // Stripe.publishableKey = stripePublishableKey;
-
   try {
     Stripe.publishableKey = stripePublishableKey;
     await Stripe.instance.applySettings();
@@ -61,7 +58,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Destination App',
       debugShowCheckedModeBanner: false,
-      checkerboardOffscreenLayers: true, // this will show animation in debug
+      checkerboardOffscreenLayers: true, 
       theme: ThemeData(
         primarySwatch: Colors.blue,
         useMaterial3: false,
