@@ -11,9 +11,9 @@ class FavoritePage extends StatelessWidget {
     return Scaffold(
       appBar: MyAppBar(title: "Favorites"),
       drawer: DrawerWidget(
-        userName: "Jane Smith",
-        userEmail: "jane@example.com",
-        profileImageUrl: "images/profile.jpg",
+        userName: "Robert Downey Jr.",
+        userEmail: "rdj@marvel.com",
+        profileImageUrl: "assets/images/profile.jpg",
       ),
       body: Consumer<FavoritesProvider>(
         builder: (context, provider, _) {
@@ -40,10 +40,9 @@ class FavoritePage extends StatelessWidget {
                             fit: BoxFit.cover,
                           ),
                   )
-                      
                 ),
                 title: Text(destination.name),
-                subtitle: Text(destination.description),
+                subtitle: Text(destination.description, maxLines: 2),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -75,7 +74,6 @@ class FavoritePage extends StatelessWidget {
                   // onPressed: () => _confirmClearAll(context, provider),
                   onPressed: () async {
                     await _confirmClearAll(context , provider);
-                    // await provider.clearAllFavorites();
                   },
                   tooltip: 'Clear All',
                   backgroundColor: Colors.red,

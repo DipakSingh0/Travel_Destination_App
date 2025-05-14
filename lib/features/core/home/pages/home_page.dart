@@ -39,10 +39,10 @@ class _HomePageState extends State<HomePage> {
           : null,
       drawer: _currentIndex == 0
           ? DrawerWidget(
-              userName: "Jane Smith",
-              userEmail: "jane@example.com",
-              profileImageUrl: "assets/images/profile.jpg",
-            )
+        userName: "Robert Downey Jr.",
+        userEmail: "rdj@marvel.com",
+        profileImageUrl: "assets/images/profile.jpg",
+      )
           : null,
       body: 
       // AnimatedSwitcher(
@@ -97,111 +97,3 @@ class HomeContent extends StatelessWidget {
     return DestinationGridView(destinations: destinations);
   }
 }
-
-
-// import 'package:hero_anim/features/core/home/widgets/search_bar_widget.dart';
-// import 'package:hero_anim/imports.dart';
-
-// class HomePage extends StatefulWidget {
-//   const HomePage({super.key});
-
-//   @override
-//   State<HomePage> createState() => _HomePageState();
-// }
-
-// class _HomePageState extends State<HomePage> {
-//   int _currentIndex = 0;
-//   final SearchController _searchController =
-//       SearchController();
-
-//   final List<Widget> _pages = [
-//     const HomeContent(),
-//     const CategoriesPage(),
-//     const FavoritePage(),
-//     // const ProfilePage(),
-//   ];
-
-//   @override
-//   void dispose() {
-//     _searchController.dispose(); 
-//     super.dispose();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: _currentIndex == 0
-//           ? MyAppBar(
-//               title: "Travel Destination",
-//               actions: [
-//                 IconButton(
-//                   icon: const Icon(Icons.person),
-//                   onPressed: () {
-//                     Navigator.push(
-//                       context,
-//                       PageTransitionAnimation(
-//                           builder: (_) => const ProfilePage()),
-//                     );
-//                   },
-//                 )
-//               ],
-//             )
-//           : null,
-//       drawer: _currentIndex == 0
-//           ? DrawerWidget(
-//               userName: "Jane Smith",
-//               userEmail: "jane@example.com",
-//               profileImageUrl: "images/profile.jpg",
-//             )
-//           : null,
-//       body: KeyedSubtree(
-//         key: ValueKey<int>(_currentIndex),
-//         child: _pages[_currentIndex],
-//       ),
-//       bottomNavigationBar: CustomBottomNavBar(
-//         currentIndex: _currentIndex,
-//         onTap: (index) {
-//           setState(() {
-//             _currentIndex = index;
-//           });
-//         },
-//       ),
-//     );
-//   }
-// }
-
-// class HomeContent extends StatelessWidget {
-//   const HomeContent({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final destinations = Provider.of<DestinationProvider>(context).destinations;
-
-//     return Column(
-//       children: [
-//         // Add SearchBarWidget here
-//         Padding(
-//           padding: const EdgeInsets.all(16.0),
-//           child: SearchBarWidget(
-//             controller:
-//                 SearchController(), 
-//             padding: const WidgetStatePropertyAll<EdgeInsets>(
-//               EdgeInsets.symmetric(horizontal: 16.0),
-//             ),
-//             onTap: () {
-//              
-//             },
-//             onChanged: (value) {
-//              
-//             },
-//             leading: const Icon(Icons.search),
-//             trailing: const <Widget>[],
-//           ),
-//         ),
-//         Expanded(
-//           child: DestinationGridView(destinations: destinations),
-//         ),
-//       ],
-//     );
-//   }
-// }
