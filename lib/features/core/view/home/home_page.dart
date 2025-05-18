@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:hero_anim/imports.dart';
 
 class HomePage extends StatefulWidget {
@@ -24,32 +26,21 @@ class _HomePageState extends State<HomePage> {
             ? MyAppBar(
                 title: "Travel Destination",
                 actions: [
-                  // IconButton(
-                  //   icon: const Icon(Icons.person),
-                  //   onPressed: () {
-                  //     Navigator.push(
-                  //       context,
-                  //       PageTransitionAnimation(
-                  //           builder: (_) => const ProfilePage()),
-                  //     );
-                  //   },
-                  // )
                   Padding(
                     padding: const EdgeInsets.only(right: 8.0),
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ProfilePage()));
+                        // Ensure we're mounted before navigating
+                        if (mounted) {
+                          // Add a small delay to ensure the Hero widget is ready
+                          Future.microtask(() {
+                            context.push('/profile');
+                          });
+                        }
                       },
-                      child: Hero(
-                        tag: 'profile_image',
-                        child: CircleAvatar(
-                          radius: 20, // Smaller radius for app bar
-                          backgroundImage: AssetImage(AppAssets.kProfile),
-                          // child: Image.asset(AppAssets.kProfile)
-                        ),
+                      child: CircleAvatar(
+                        radius: 20, // Smaller radius for app bar
+                        backgroundImage: AssetImage(AppAssets.kProfile),
                       ),
                     ),
                   ),

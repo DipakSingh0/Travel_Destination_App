@@ -31,12 +31,13 @@ class DestinationGridView extends StatelessWidget {
           final destination = destinations[index];
           return GestureDetector(
             onTap: () {
-              Navigator.push(
-                context,
-                CustomPageRoute(
-                  builder: (_) => DetailPage(destination: destination),
-                ),
-              );
+              // Navigator.push(
+              //   context,
+              //   CustomPageRoute(
+              //     builder: (_) => DetailPage(destination: destination),
+              //   ),
+              context.push('/details', extra: destination);
+              
             },
             child: Card(
               shape: RoundedRectangleBorder(

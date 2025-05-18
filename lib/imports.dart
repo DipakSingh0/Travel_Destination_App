@@ -31,3 +31,6 @@ export 'package:hero_anim/common/utils/assets.dart';
 export 'package:hero_anim/common/widgets/primary_button.dart';
 export 'package:hero_anim/features/core/provider/favorites_provider.dart';
 export 'package:hero_anim/features/core/view/favorites/widgets/favorite_icon_widget.dart';
+export 'package:hero_anim/common/utils/consts.dart';
+export 'package:hero_anim/features/core/view/categories/widgets/categories_expansion_tile.dart';
+export 'package:go_router/go_router.dart';

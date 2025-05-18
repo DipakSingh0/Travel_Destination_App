@@ -1,29 +1,19 @@
-import 'package:flutter_stripe/flutter_stripe.dart';
-import 'package:hero_anim/common/utils/consts.dart';
-import 'package:hero_anim/features/auth/view/welcome/welcome_screen.dart';
-import 'package:hero_anim/imports.dart';
-import 'package:hero_anim/features/core/view/profile/profile_page.dart';
-import 'package:hero_anim/features/core/view/favorites/favorites_page.dart';
-import 'package:hero_anim/features/core/view/details/detail_page.dart';
-import 'package:hero_anim/features/core/view/categories/categories_page.dart';
-import 'package:go_router/go_router.dart';
-
 // GoRouter configuration
+import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:hero_anim/imports.dart';
+
 final _router = GoRouter(
   initialLocation: '/',
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => HomePage(),
+      builder: (context, state) => const HomePage(),
     ),
     GoRoute(
       path: '/profile',
       builder: (context, state) => const ProfilePage(),
     ),
-    GoRoute(
-      path: '/favorites',
-      builder: (context, state) => const FavoritePage(),
-    ),
+     
     GoRoute(
       path: '/details',
       builder: (context, state) {
@@ -35,10 +25,6 @@ final _router = GoRouter(
           itemName: params['item'],
         );
       },
-    ),
-    GoRoute(
-      path: '/categories',
-      builder: (context, state) => const CategoriesPage(),
     ),
   ],
 );

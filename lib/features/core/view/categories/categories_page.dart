@@ -1,13 +1,4 @@
-// pages/categories_page.dart
-import 'package:flutter/material.dart';
-import 'package:hero_anim/common/widgets/drawer_widget.dart';
-import 'package:hero_anim/common/widgets/my_appbar.dart';
-import 'package:hero_anim/features/core/model/destination_model.dart';
-import 'package:hero_anim/features/core/view/categories/widgets/categories_expansion_tile.dart';
-import 'package:hero_anim/features/core/view/details/detail_page.dart';
-import 'package:hero_anim/features/core/provider/categories_provider.dart';
-import 'package:provider/provider.dart';
-import 'package:go_router/go_router.dart';
+import 'package:hero_anim/imports.dart';
 
 class CategoriesPage extends StatelessWidget {
   const CategoriesPage({super.key});

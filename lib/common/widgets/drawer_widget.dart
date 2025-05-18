@@ -76,25 +76,15 @@ class DrawerWidget extends StatelessWidget {
             title: const Text('Profile'),
             onTap: () {
               // Navigator.pop(context); // Close drawer first
-              Navigator.push(
-                  context,
-                  CustomPageRoute(
-                    builder: (_) => ProfilePage(),
-                  ));
+              // Navigator.push(
+              //     context,
+              //     CustomPageRoute(
+              //       builder: (_) => ProfilePage(),
+              //     ));
+              context.push('/profile');
             },
+
           ),
-          // ListTile(
-          //   leading: const Icon(Icons.favorite),
-          //   title: const Text('Favorites'),
-          //   onTap: () {
-          //     // Navigator.pop(context);
-          //     Navigator.push(
-          //         context,
-          //         CustomPageRoute(
-          //           builder: (_) => FavoritePage(),
-          //         ));
-          //   },
-          // ),
           ListTile(
             leading: const Icon(Icons.settings),
             title: const Text('Settings'),

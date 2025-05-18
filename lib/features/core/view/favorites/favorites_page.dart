@@ -52,12 +52,14 @@ class FavoritePage extends StatelessWidget {
                   ],
                 ),
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => DetailPage(destination: destination),
-                    ),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (_) => DetailPage(destination: destination),
+                  //   ),
+                  // );
+                  context.push('/details', extra: destination);
+
                 },
               );
             },
