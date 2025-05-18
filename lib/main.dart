@@ -2,6 +2,46 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:hero_anim/common/utils/consts.dart';
 import 'package:hero_anim/features/auth/view/welcome/welcome_screen.dart';
 import 'package:hero_anim/imports.dart';
+import 'package:hero_anim/features/core/view/profile/profile_page.dart';
+import 'package:hero_anim/features/core/view/favorites/favorites_page.dart';
+import 'package:hero_anim/features/core/view/details/detail_page.dart';
+import 'package:hero_anim/features/core/view/categories/categories_page.dart';
+import 'package:go_router/go_router.dart';
+
+// GoRouter configuration
+final _router = GoRouter(
+  initialLocation: '/',
+  routes: [
+    GoRoute(
+      path: '/',
+      builder: (context, state) => HomePage(),
+    ),
+    GoRoute(
+      path: '/profile',
+      builder: (context, state) => const ProfilePage(),
+    ),
+    GoRoute(
+      path: '/favorites',
+      builder: (context, state) => const FavoritePage(),
+    ),
+    GoRoute(
+      path: '/details',
+      builder: (context, state) {
+        final destination = state.extra as Destination;
+        final params = state.uri.queryParameters;
+        return DetailPage(
+          destination: destination,
+          categoryName: params['category'],
+          itemName: params['item'],
+        );
+      },
+    ),
+    GoRoute(
+      path: '/categories',
+      builder: (context, state) => const CategoriesPage(),
+    ),
+  ],
+);
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -55,18 +95,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Destination App',
       debugShowCheckedModeBanner: false,
-      checkerboardOffscreenLayers: true, 
+      checkerboardOffscreenLayers: true,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         useMaterial3: false,
       ),
-      // home: HomePage(),
-      home: const WelcomeScreen(),
-      // home: LoginScreen(),
-      // home: SignInView()
+      routerConfig: _router,
     );
   }
 }

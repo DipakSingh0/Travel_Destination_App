@@ -7,6 +7,7 @@ import 'package:hero_anim/features/core/view/categories/widgets/categories_expan
 import 'package:hero_anim/features/core/view/details/detail_page.dart';
 import 'package:hero_anim/features/core/provider/categories_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
 
 class CategoriesPage extends StatelessWidget {
   const CategoriesPage({super.key});
@@ -17,20 +18,24 @@ class CategoriesPage extends StatelessWidget {
     final categoryItem = categoryProvider.getItem(category, item);
 
     if (categoryItem != null) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (_) => DetailPage(
-            destination: Destination(
-              imageUrl: categoryItem.imageUrl,
-              name: categoryItem.name,
-              description: categoryItem.description,
-              price: categoryItem.price,
-              isAsset: true,
-              isFavorite: categoryItem.isFavorite,
-            ),
-          ),
-        ),
+      final destination = Destination(
+        imageUrl: categoryItem.imageUrl,
+        name: categoryItem.name,
+        description: categoryItem.description,
+        price: categoryItem.price,
+        isAsset: true,
+        isFavorite: categoryItem.isFavorite,
+      );
+      
+      context.push(
+        Uri(
+          path: '/details',
+          queryParameters: {
+            'category': category,
+            'item': item,
+          },
+        ).toString(),
+        extra: destination,
       );
     }
   }
