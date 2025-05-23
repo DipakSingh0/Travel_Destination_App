@@ -37,7 +37,6 @@ class DestinationGridView extends StatelessWidget {
               //     builder: (_) => DetailPage(destination: destination),
               //   ),
               context.push('/details', extra: destination);
-              
             },
             child: Card(
               shape: RoundedRectangleBorder(
@@ -66,8 +65,8 @@ class DestinationGridView extends StatelessWidget {
                     ],
                   ),
                   Positioned(
-                    bottom: 8,
-                    left: 8,
+                    bottom: 2,
+                    left: 2,
                     right: 8,
                     child: Container(
                       padding: EdgeInsets.all(4),
@@ -89,6 +88,7 @@ class DestinationGridView extends StatelessWidget {
                             destination.price,
                             style: TextStyle(
                               fontSize: 16,
+                              fontWeight: FontWeight.w700,
                               color: Colors.white,
                             ),
                           ),
@@ -106,9 +106,30 @@ class DestinationGridView extends StatelessWidget {
                   //   ),
                   // ),
 
+                 
+
                   Positioned(
-                    bottom: 20,
-                    right: 12,
+                      top: 6,
+                      right: 8,
+                      child: Row(
+                        children: [
+                          Text(
+                            destination.rating.toString(),
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700),
+                          ),
+                          Icon(
+                            Icons.star,
+                            color: Colors.yellow,
+                            size: 18,
+                          ),
+                        ],
+                      )),
+                       Positioned(
+                    bottom: 8,
+                    right: 8,
                     child: Consumer<FavoritesProvider>(
                       builder: (context, favoritesProvider, child) {
                         return FavoriteIconWidget(

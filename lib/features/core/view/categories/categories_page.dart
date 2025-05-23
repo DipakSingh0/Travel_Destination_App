@@ -16,6 +16,9 @@ class CategoriesPage extends StatelessWidget {
         price: categoryItem.price,
         isAsset: true,
         isFavorite: categoryItem.isFavorite,
+        rating: categoryItem.rating,
+        latitude: categoryItem.latitude,
+        longitude: categoryItem.longitude,
       );
       
       context.push(

@@ -16,6 +16,9 @@ Explore world-class museums like the Tokyo National Museum, or lose yourself in 
 Whether you're seeking cutting-edge technology, traditional arts, vibrant nightlife, or tranquil gardens, Tokyo delivers an unforgettable experience. The efficiency of its public transport makes navigating this vast city a breeze, allowing you to fully immerse yourself in its dynamic energy and the warm hospitality of its people. Tokyo is more than just a city; it's a captivating world of its own.''',
       price: '\$1500',
       isAsset: true,
+      rating: 4.8,
+      latitude: 35.6762,
+      longitude: 139.6503,
     ),
     Destination(
       imageUrl: AppAssets.kTilicho,
@@ -28,6 +31,9 @@ The trek to Tilicho Lake is a challenging yet incredibly rewarding adventure, ty
 Reaching Tilicho Lake offers a moment of unparalleled tranquility and accomplishment. The serene atmosphere, combined with the panoramic views of the Himalayas, makes it a spiritual haven for many. It's a place where the grandeur of nature is on full display, leaving an indelible mark on all who make the pilgrimage to its pristine shores.''',
       price: '\$1200',
       isAsset: true,
+      rating: 4.7,
+      latitude: 28.6855,
+      longitude: 83.9492,
     ),
     Destination(
       imageUrl:
@@ -41,10 +47,13 @@ The Everest region, or Khumbu, is not just about the summit; it's a land of dram
 For mountaineers, conquering Everest is a lifelong dream, a formidable test of skill, courage, and perseverance against extreme altitudes and harsh weather conditions. But even for those who admire it from afar or trek its foothills, Mount Everest instills a profound sense of wonder and respect for the raw, untamed beauty of the natural world, making it a truly iconic and unforgettable destination.''',
       price: '\$900',
       isAsset: true,
+      rating: 4.9,
+      latitude: 27.9881,
+      longitude: 86.9250,
     ),
     Destination(
       imageUrl:
-          AppAssets.kNepal, // Image path suggests Everest, name is Nepal
+          AppAssets.kNepal, 
       name: 'Nepal',
       description:
           '''Nepal, a landlocked nation nestled in the heart of the Himalayas, is a country of breathtaking natural beauty and profound cultural richness. From the towering snow-capped peaks of the world's highest mountains, including Mount Everest, to lush subtropical forests and ancient cities teeming with history, Nepal offers an astonishing diversity of landscapes and experiences. It's a place where spirituality and adventure intertwine seamlessly.
@@ -54,6 +63,9 @@ The vibrant culture of Nepal is a tapestry woven from Hindu and Buddhist traditi
 Beyond its cultural treasures, Nepal is an adventurer's paradise. Whether it's trekking through legendary mountain trails, white-water rafting down pristine rivers, paragliding with Himalayan vistas, or exploring diverse wildlife in national parks like Chitwan, Nepal offers an adrenaline rush for every thrill-seeker. It's a destination that captivates the soul and leaves visitors with lasting memories of its majestic scenery and enduring spirit.''',
       price: '\$900',
       isAsset: true,
+      rating: 4.6,
+      latitude: 27.7172,
+      longitude: 85.3240,
     ),
     Destination(
       imageUrl: AppAssets.kNewyork,
@@ -66,6 +78,9 @@ Each of the city's five boroughs—Manhattan, Brooklyn, Queens, The Bronx, and S
 New York is a city of dreams and ambitions, a place where innovation thrives and creativity flourishes. It's a hub for entrepreneurs, artists, and visionaries from around the world, contributing to its dynamic and ever-evolving atmosphere. Whether you're a first-time visitor or a seasoned traveler, NYC's magnetic charm and boundless opportunities for exploration promise an unforgettable urban adventure.''',
       price: '\$1600',
       isAsset: true,
+      rating: 4.7,
+      latitude: 40.7128,
+      longitude: -74.0060,
     ),
     Destination(
       imageUrl: AppAssets.kKongkong,
@@ -78,6 +93,9 @@ Beyond its urban intensity, Hong Kong offers surprisingly beautiful natural land
 Hong Kong's culinary scene is legendary, offering everything from dim sum and street food delicacies to high-end international cuisine. The city's rich colonial history and Chinese heritage blend to create a unique cultural tapestry, reflected in its festivals, temples, and bustling markets. Hong Kong is a city of contrasts, where modernity meets tradition, offering an exhilarating and multifaceted travel experience.''',
       price: '\$1500',
       isAsset: true,
+      rating: 4.5,
+      latitude: 22.3193,
+      longitude: 114.1694,
     ),
     Destination(
       imageUrl: AppAssets.kMaldives,
@@ -90,6 +108,9 @@ Beneath the shimmering surface lies a vibrant underwater world, making the Maldi
 The Maldivian culture, though often overshadowed by its resort experiences, is rich and unique, with influences from South Asian, Arab, and African traders. Visitors can get a glimpse of local life by visiting inhabited islands, enjoying traditional music and dance performances, or savoring local cuisine. The Maldives offers an unparalleled escape, where breathtaking beauty and serene luxury create memories to last a lifetime.''',
       price: '\$1200',
       isAsset: true,
+      rating: 4.8,
+      latitude: 3.2028,
+      longitude: 73.2207,
     ),
     Destination(
       imageUrl: AppAssets.kFiji,
@@ -102,6 +123,9 @@ The Fijian culture is rich and welcoming, characterized by the warm "Bula!" gree
 Beyond its stunning beaches and underwater wonders, Fiji's lush interiors offer opportunities for hiking to waterfalls, exploring rainforests, and discovering hidden gems. Whether you're looking for a luxurious resort stay, a family-friendly holiday, or an adventurous escape, Fiji's diverse islands cater to all tastes, promising a blissful and unforgettable South Pacific getaway.''',
       price: '\$1700',
       isAsset: true,
+      rating: 4.6,
+      latitude: -17.7134,
+      longitude: 178.0650,
     ),
     Destination(
       imageUrl:
@@ -115,6 +139,9 @@ The vibrant culture of Nepal is a tapestry woven from Hindu and Buddhist traditi
 Beyond its cultural treasures, Nepal is an adventurer's paradise. Whether it's trekking through legendary mountain trails, white-water rafting down pristine rivers, paragliding with Himalayan vistas, or exploring diverse wildlife in national parks like Chitwan, Nepal offers an adrenaline rush for every thrill-seeker. It's a destination that captivates the soul and leaves visitors with lasting memories of its majestic scenery and enduring spirit.''', // Reusing the Nepal description from earlier entry with 'Nepal' as name
       price: '\$900',
       isAsset: true,
+      rating: 4.6,
+      latitude: 27.7172,
+      longitude: 85.3240,
     ),
     Destination(
       imageUrl: AppAssets.kTilicho,
@@ -127,6 +154,9 @@ The trek to Tilicho Lake is a challenging yet incredibly rewarding adventure, ty
 Reaching Tilicho Lake offers a moment of unparalleled tranquility and accomplishment. The serene atmosphere, combined with the panoramic views of the Himalayas, makes it a spiritual haven for many. It's a place where the grandeur of nature is on full display, leaving an indelible mark on all who make the pilgrimage to its pristine shores.''', // Reusing Tilicho Lake description
       price: '\$1200',
       isAsset: true,
+      rating: 4.7,
+      latitude: 28.6855,
+      longitude: 83.9492,
     ),
     Destination(
       imageUrl: AppAssets.kTokyo,
@@ -136,9 +166,12 @@ Reaching Tilicho Lake offers a moment of unparalleled tranquility and accomplish
 
 Dive into the city's rich artistic heritage at the Ueno Park museums, witness the precision of a traditional tea ceremony, or experience the vibrant pop culture of Akihabara. Tokyo's food scene is legendary, offering everything from the freshest sushi at the Toyosu Fish Market to delectable street food and world-class fine dining. Each neighborhood tells a different story, creating a diverse and captivating urban tapestry.
 
-Beyond its iconic landmarks like the Tokyo Skytree and the Imperial Palace, Tokyo’s charm lies in its smaller details: serene gardens hidden amidst concrete jungles, meticulously crafted goods, and the polite efficiency of its residents. It’s a city that constantly reinvents itself, ensuring that every visit uncovers new facets of its dynamic personality, making it an endlessly fascinating destination.''', // Second Tokyo entry, slightly different focus
+Beyond its iconic landmarks like the Tokyo Skytree and the Imperial Palace, Tokyo’s charm lies in its smaller details: serene gardens hidden amidst concrete jungles, meticulously crafted goods, and the polite efficiency of its residents. It’s a city that constantly reinvents itself, ensuring that every visit uncovers new facets of its dynamic personality, making it an endlessly fascinating destination.''', 
       price: '\$1250',
       isAsset: true,
+      rating: 4.8,
+      latitude: 35.6762,
+      longitude: 139.6503,
     ),
     Destination(
       imageUrl: AppAssets.kMaldives,
@@ -151,6 +184,9 @@ Explore the breathtaking coral reefs that make the Maldives a world-class destin
 Beyond the luxurious resorts, the Maldivian culture offers a unique island charm. Discover local traditions, savor fresh seafood infused with regional spices, and enjoy the laid-back pace of island life. The Maldives is more than just a picturesque postcard; it's an immersive experience that rejuvenates the senses and creates cherished memories of sun-drenched days and starlit nights.''', // Second Maldives entry, slightly different focus
       price: '\$1500',
       isAsset: true,
+      rating: 4.8,
+      latitude: 3.2028,
+      longitude: 73.2207,
     ),
     Destination(
       imageUrl: AppAssets.kKili,
@@ -163,6 +199,9 @@ Explore the breathtaking coral reefs that make the Maldives a world-class destin
 Beyond the luxurious resorts, the Maldivian culture offers a unique island charm. Discover local traditions, savor fresh seafood infused with regional spices, and enjoy the laid-back pace of island life. The Maldives is more than just a picturesque postcard; it's an immersive experience that rejuvenates the senses and creates cherished memories of sun-drenched days and starlit nights.''', // Second Maldives entry, slightly different focus
       price: '\$1250',
       isAsset: true,
+      rating: 4.7,
+      latitude: -3.0674,
+      longitude: 37.3556,
     ),
   ];
 

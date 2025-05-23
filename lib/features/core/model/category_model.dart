@@ -5,6 +5,9 @@ class CategoryItem {
   final String description;
   final String price;
   bool isFavorite;
+  final double rating;
+  final double latitude;
+  final double longitude;
 
   CategoryItem({
     required this.name,
@@ -12,19 +15,18 @@ class CategoryItem {
     required this.description,
     required this.price,
     this.isFavorite = false,
+    required this.rating,
+    required this.latitude,
+    required this.longitude,
   });
 }
 
 class Category {
   final String name;
-  final String imageUrl;
-  final bool isAsset;
   final Map<String, CategoryItem> items;
 
   Category({
     required this.name,
     required this.items,
-    required this.imageUrl,
-    this.isAsset = false,
   });
 }

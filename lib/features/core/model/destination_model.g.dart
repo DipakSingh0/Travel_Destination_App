@@ -22,6 +22,9 @@ class DestinationAdapter extends TypeAdapter<Destination> {
       description: fields[2] as String,
       price: fields[3] as String,
       isAsset: fields[4] as bool,
+      rating: fields[6] as double,
+      latitude: fields[7] as double,
+      longitude: fields[8] as double,
       isFavorite: fields[5] as bool,
     );
   }
@@ -29,7 +32,7 @@ class DestinationAdapter extends TypeAdapter<Destination> {
   @override
   void write(BinaryWriter writer, Destination obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.imageUrl)
       ..writeByte(1)
@@ -41,7 +44,13 @@ class DestinationAdapter extends TypeAdapter<Destination> {
       ..writeByte(4)
       ..write(obj.isAsset)
       ..writeByte(5)
-      ..write(obj.isFavorite);
+      ..write(obj.isFavorite)
+      ..writeByte(6)
+      ..write(obj.rating)
+      ..writeByte(7)
+      ..write(obj.latitude)
+      ..writeByte(8)
+      ..write(obj.longitude);
   }
 
   @override
