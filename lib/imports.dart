@@ -34,3 +34,13 @@ export 'package:hero_anim/features/core/view/favorites/widgets/favorite_icon_wid
 export 'package:hero_anim/common/utils/consts.dart';
 export 'package:hero_anim/features/core/view/categories/widgets/categories_expansion_tile.dart';
 export 'package:go_router/go_router.dart';
+export 'package:hero_anim/features/core/model/category_model.dart';
+export 'package:hero_anim/features/core/view/categories/widgets/list_item_widget.dart';
+export 'package:flutter/gestures.dart';
+export 'package:hero_anim/features/auth/view/sign_up/sign_up_view.dart';
+export 'package:hero_anim/features/auth/widgets/custom_text_button.dart';
+export 'package:hero_anim/features/auth/widgets/agree_terms_card.dart';
+export 'package:hero_anim/features/auth/widgets/auth_field.dart';
+export 'package:hero_anim/features/auth/widgets/custom_social_button.dart';
+export 'package:hero_anim/features/auth/widgets/remember_me_card.dart';
+export 'package:hero_anim/features/auth/widgets/text_with_divider.dart';

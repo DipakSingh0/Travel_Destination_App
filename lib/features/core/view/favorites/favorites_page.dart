@@ -39,15 +39,24 @@ class FavoritePage extends StatelessWidget {
                   )
                 ),
                 title: Text(destination.name),
-                subtitle: Text(destination.description, maxLines: 2),
+                subtitle:   Row(
+                      children: [
+                        Text(destination.rating.toString()),
+                        Icon(Icons.star, color: Colors.yellow),
+                      ],
+                    ),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(destination.price),
+                        Text(destination.price , 
+                        style: TextStyle(fontSize: 15, 
+                        fontWeight: FontWeight.w500),),
+
+                  
                     const SizedBox(width: 8),
                     FavoriteIconWidget(
                       destination: destination,
-                      size: 28,
+                      size: 25,
                     ),
                   ],
                 ),

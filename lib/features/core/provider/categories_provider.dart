@@ -1,4 +1,3 @@
-import 'package:hero_anim/features/core/model/category_model.dart';
 import 'package:hero_anim/imports.dart';
 
 class CategoryProvider with ChangeNotifier {

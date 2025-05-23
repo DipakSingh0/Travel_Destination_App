@@ -1,11 +1,3 @@
-import 'package:flutter/gestures.dart';
-import 'package:hero_anim/features/auth/view/sign_up/sign_up_view.dart';
-import 'package:hero_anim/features/auth/widgets/custom_text_button.dart';
-import 'package:hero_anim/features/auth/widgets/agree_terms_card.dart';
-import 'package:hero_anim/features/auth/widgets/auth_field.dart';
-import 'package:hero_anim/features/auth/widgets/custom_social_button.dart';
-import 'package:hero_anim/features/auth/widgets/remember_me_card.dart';
-import 'package:hero_anim/features/auth/widgets/text_with_divider.dart';
 import 'package:hero_anim/imports.dart';
 
 class SignInView extends StatefulWidget {
@@ -108,10 +100,12 @@ class _SignInViewState extends State<SignInView> {
                     if (_formKey.currentState!.validate()) {
                         Navigator.pushAndRemoveUntil(
                         context,
-                        MaterialPageRoute(builder: (context) => HomePage()),
+                        MaterialPageRoute(builder: (context) => HomePage()
+                        ),
                         (Route<dynamic> route) =>
                             false, // This condition removes all routes below the new one.
                       );
+                      // context.go('/home');
                     }
                   },
                   text: 'Sign In',
@@ -128,10 +122,11 @@ class _SignInViewState extends State<SignInView> {
                       TextSpan(
                         text: 'Sign Up',
                         recognizer: TapGestureRecognizer()..onTap = () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SignUpView()),
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => SignUpView()),
+                          context.go('/sign_up'
                             );
                         },
                         style: const TextStyle(

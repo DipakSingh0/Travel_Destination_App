@@ -1,7 +1,4 @@
-// pages/categories/categories_expansion_tile.dart
-import 'package:flutter/material.dart';
-import 'package:hero_anim/features/core/model/category_model.dart';
-import 'package:hero_anim/features/core/view/categories/widgets/list_item_widget.dart';
+import 'package:hero_anim/imports.dart';
 
 class CategoryExpansionTile extends StatelessWidget {
   final Category category;
@@ -27,6 +24,12 @@ class CategoryExpansionTile extends StatelessWidget {
         return ListItem(
           title: item.name,
           subtitle: '${category.name} destination',
+        //  trailing: Row(
+        //               children: [
+        //                 Text(category.rating.toString()),
+        //                 Icon(Icons.star, color: Colors.yellow),
+        //               ],
+        //             ),
           imageUrl: item.imageUrl,
           heroTag: 'destination_hero_${item.imageUrl}',
           onTap: () => onItemTap?.call(category.name, item.name),

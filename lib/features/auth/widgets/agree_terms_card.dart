@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:hero_anim/imports.dart';
 
 class AgreeTermsTextCard extends StatelessWidget {

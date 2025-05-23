@@ -1,5 +1,5 @@
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapService {
   Future<LatLng?> getCurrentLocation() async {
@@ -35,6 +35,7 @@ class MapService {
   }) {
     final markers = <Marker>{};
 
+    // ----add current location marker to map---- // 
     if (currentLocation != null) {
       markers.add(
         Marker(
@@ -46,29 +47,31 @@ class MapService {
       );
     }
 
+    // ----add destination marker to map---- // 
     if (initialLocation != null) {
       markers.add(
         Marker(
-          markerId: const MarkerId('initial_position'),
+          markerId: const MarkerId('destination'),
           position: initialLocation,
           icon: markerIcon,
-          infoWindow: const InfoWindow(title: 'Selected Location'),
+          infoWindow: const InfoWindow(title: 'Destination'),
         ),
       );
     }
 
-    if (additionalMarkers != null) {
-      for (int i = 0; i < additionalMarkers.length; i++) {
-        markers.add(
-          Marker(
-            markerId: MarkerId('additional_marker_$i'),
-            position: additionalMarkers[i],
-            icon: markerIcon,
-            infoWindow: InfoWindow(title: 'Point ${i + 1}'),
-          ),
-        );
-      }
-    }
+    // ----add additional markers to map---- //
+    // if (additionalMarkers != null) {
+    //   for (int i = 0; i < additionalMarkers.length; i++) {
+    //     markers.add(
+    //       Marker(
+    //         markerId: MarkerId('additional_marker_$i'),
+    //         position: additionalMarkers[i],
+    //         icon: markerIcon,
+    //         infoWindow: InfoWindow(title: 'Point ${i + 1}'),
+    //       ),
+    //     );
+    //   }
+    // }
 
     return markers;
   }

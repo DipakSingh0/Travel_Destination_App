@@ -1,8 +1,3 @@
-import 'package:hero_anim/features/auth/widgets/agree_terms_card.dart';
-import 'package:hero_anim/features/auth/widgets/auth_field.dart';
-import 'package:hero_anim/features/auth/view/sign_in/sign_in_view.dart';
-import 'package:hero_anim/features/auth/widgets/custom_social_button.dart';
-import 'package:hero_anim/features/auth/widgets/text_with_divider.dart';
 import 'package:hero_anim/imports.dart';
 
 class SignUpView extends StatefulWidget {
@@ -104,10 +99,11 @@ class _SignUpViewState extends State<SignUpView> {
                 PrimaryButton(
                   onTap: () {
                     if (_formKey.currentState!.validate()) {
-                        Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => SignInView()),
-                      );
+                      //   Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(builder: (context) => SignInView()),
+                      // );
+                      context.go('/sign_in');
                     }
                   },
                   text: 'Create An Account',

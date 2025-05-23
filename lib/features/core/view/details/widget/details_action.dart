@@ -23,7 +23,7 @@ class DetailActions extends StatelessWidget {
       color: Colors.transparent,
       elevation: 0,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 15),
         child: Row(
           children: [
             Container(
@@ -36,20 +36,20 @@ class DetailActions extends StatelessWidget {
                 builder: (context, favoritesProvider, child) {
                   return FavoriteIconWidget(
                     destination: destination,
-                    size: 28,
+                    size: 32,
                   );
                 },
               ),
             ),
-            const SizedBox(width: 16),
+            const SizedBox(width: 14),
             Expanded(
               child: PrimaryButton(
                 text: 'Book now',
                 onTap: () async {
                   try {
                     await StripeService.instance.makePayment(
-                      amount: amount,
-                      currency: 'USD', // Or your currency
+                      amount: 100,
+                      currency: 'USD',
                       description: 'Booking for ${destination.name}',
                     );
 
@@ -73,8 +73,8 @@ class DetailActions extends StatelessWidget {
                 textColor: Colors.white,
                 color: Colors.blue,
                 borderRadius: 30.0,
-                fontSize: 18.0,
-                height: 45.0,
+                fontSize: 20.0,
+                height: 50.0,
               ),
             ),
           ],
@@ -83,64 +83,3 @@ class DetailActions extends StatelessWidget {
     );
   }
 }
-
-
-// import 'package:hero_anim/imports.dart';
-
-// class DetailActions extends StatelessWidget {
-//   final Destination destination;
-//   final String? categoryName;
-//   final String? itemName;
-
-//   const DetailActions({super.key, 
-//     required this.destination,
-//     this.categoryName,
-//     this.itemName,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return BottomAppBar(
-//       color: Colors.transparent,
-//       elevation: 0,
-//       child: Padding(
-//         padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
-//         child: Row(
-//           children: [
-//               Container(
-//               padding: const EdgeInsets.all(10),
-//               decoration: BoxDecoration(
-//                 color: Colors.grey[200],
-//                 shape: BoxShape.circle,
-//               ),
-//               child: Consumer<FavoritesProvider>(
-//                 builder: (context, favoritesProvider, child) {
-//                   return FavoriteIconWidget(
-//                     destination: destination,
-//                     size: 28,
-//                   );
-//                 },
-//               ),
-//             ),
-//             const SizedBox(width: 16),
-//             Expanded(
-//               child: PrimaryButton(
-//                 text: 'Book now',
-//                 onTap: () {
-//                   ScaffoldMessenger.of(context).showSnackBar(
-//                     const SnackBar(content: Text('Book pressed!')),
-//                   );
-//                 },
-//                 textColor: Colors.white,
-//                 color: Colors.blue,
-//                 borderRadius: 30.0,
-//                 fontSize: 18.0,
-//                 height: 45.0,
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }

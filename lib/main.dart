@@ -1,7 +1,8 @@
 // GoRouter configuration
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:hero_anim/features/auth/view/sign_in/sign_in_view.dart';
 import 'package:hero_anim/imports.dart';
-import 'package:hero_anim/map_screen1.dart';
+import 'package:hero_anim/features/core/view/map_screen1.dart';
 
 final _router = GoRouter(
   initialLocation: '/',
@@ -13,6 +14,14 @@ final _router = GoRouter(
     GoRoute(
       path: '/',
       builder: (context, state) => const HomePage(),
+    ),
+    GoRoute(
+      path: '/sign_up',
+      builder: (context, state) => const SignUpView(),
+    ),
+    GoRoute(
+      path: '/sign_in',
+      builder: (context, state) => const SignInView(),
     ),
     GoRoute(
       path: '/map',
@@ -73,7 +82,8 @@ void main() async {
           create: (_) => SettingsProvider(),
         ),
         ChangeNotifierProvider(
-          create: (_) => CategoryProvider()),
+          create: (_) => CategoryProvider(),
+        ),
         ChangeNotifierProvider(
           create: (context) =>
               FavoritesProvider(

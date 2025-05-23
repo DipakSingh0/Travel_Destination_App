@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:hero_anim/common/utils/consts.dart';
 
@@ -7,11 +8,16 @@ class StripeService {
 
   static final StripeService instance = StripeService._();
 
-  Future<void> makePayment(
-      {required String currency,
-      required double amount,
-      required String description}) async {
+  Future<void> makePayment({
+    required String currency,
+    required double amount,
+    required String description,
+  }) async {
     try {
+      if (amount <= 0) {
+        throw Exception('Invalid payment amount');
+      }
+
       String? paymentIntentClientSecret = await _createPaymentIntent(
         amount: amount,
         currency: currency,
@@ -23,19 +29,23 @@ class StripeService {
 
       await Stripe.instance.initPaymentSheet(
         paymentSheetParameters: SetupPaymentSheetParameters(
-          merchantDisplayName: "Your Merchant Name",
+          merchantDisplayName: "D's Travel",
           paymentIntentClientSecret: paymentIntentClientSecret,
+          style: ThemeMode.system,
         ),
       );
 
       await _processPayment();
     } catch (e) {
-      rethrow; // Rethrow the error to be caught by the caller
+      debugPrint('Payment error: $e');
+      rethrow;
     }
   }
 
-  Future<String?> _createPaymentIntent(
-      {required double amount, required String currency}) async {
+  Future<String?> _createPaymentIntent({
+    required double amount,
+    required String currency,
+  }) async {
     try {
       final Dio dio = Dio();
       final response = await dio.post(
@@ -52,26 +62,32 @@ class StripeService {
         ),
       );
 
+      if (response.statusCode != 200) {
+        throw Exception('Failed to create payment intent: ${response.statusMessage}');
+      }
+
       if (response.data != null && response.data.containsKey('client_secret')) {
         return response.data['client_secret'];
       }
+      
+      throw Exception('Invalid response from Stripe API');
     } catch (e) {
-      print('Error creating PaymentIntent: $e');
+      debugPrint('Error creating PaymentIntent: $e');
+      rethrow;
     }
-    return null;
   }
 
   Future<void> _processPayment() async {
     try {
       await Stripe.instance.presentPaymentSheet();
     } catch (e) {
-      print('Error processing payment: $e');
+      debugPrint('Error processing payment: $e');
       rethrow;
     }
   }
 
   String _calculateAmount(double amount) {
-    // Assuming amount is in dollars, convert to cents
-    return (amount * 100).toInt().toString();
+    // Convert amount to cents and ensure it's a whole number
+    return (amount * 100).round().toString();
   }
 }

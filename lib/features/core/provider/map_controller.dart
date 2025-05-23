@@ -1,5 +1,6 @@
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'map_service.dart';
+import 'package:hero_anim/features/core/model/destination_model.dart';
+import '../services/map_service.dart';
 
 class MapController {
   final MapService _mapService = MapService();
@@ -14,7 +15,7 @@ class MapController {
   MapType mapType = MapType.normal;
 
   Future<void> initializeMap({
-    required LatLng? initialLocation,
+    required Destination? destination,
     required List<LatLng>? additionalMarkers,
     required bool showCurrentLocation,
     required bool enableAddMarkers,
@@ -22,6 +23,11 @@ class MapController {
     try {
       if (showCurrentLocation) {
         currentLocation = await _mapService.getCurrentLocation();
+      }
+
+      LatLng? initialLocation;
+      if (destination != null) {
+        initialLocation = destination.location;
       }
 
       markers = _mapService.createMarkers(
@@ -68,4 +74,4 @@ class MapController {
       ),
     );
   }
-}
+} 
