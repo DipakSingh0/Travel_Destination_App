@@ -1,4 +1,8 @@
-import 'package:hero_anim/imports.dart';
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:travel_ease/features/auth/services/auth_service.dart';
+import 'package:travel_ease/imports.dart';
 
 class SignInView extends StatefulWidget {
   const SignInView({super.key});
@@ -12,6 +16,24 @@ class _SignInViewState extends State<SignInView> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool isRemember = false;
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  // Helper function to show a snackbar
+  void _showSnackBar(String message, {bool isError = true}) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: isError ? Colors.red : Colors.green,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +69,7 @@ class _SignInViewState extends State<SignInView> {
                   title: 'Email Address',
                   hintText: 'Enter your email address',
                   controller: _emailController,
-                 validator: (value) {
+                  validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Email is required';
                     } else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
@@ -92,20 +114,53 @@ class _SignInViewState extends State<SignInView> {
                       onPressed: () {},
                       text: 'Forget Password',
                     ),
+
+                    //  CustomTextButton(
+                    //   onPressed: () async {
+                    //     // Handle Forgot Password
+                    //     final String email = _emailController.text.trim();
+                    //     if (email.isEmpty) {
+                    //       _showSnackBar(
+                    //           'Please enter your email to reset password.');
+                    //       return;
+                    //     }
+                    //     try {
+                    //       await AuthService.instance
+                    //           .sendPasswordResetEmail(email);
+                    //       _showSnackBar('Password reset email sent!',
+                    //           isError: false);
+                    //     } catch (e) {
+                    //       _showSnackBar(e.toString());
+                    //     }
+                    //   },
+                    //   text: 'Forget Password',
+                    // ),
                   ],
                 ),
                 const SizedBox(height: 15),
                 PrimaryButton(
-                  onTap: () {
+                  onTap: () async {
                     if (_formKey.currentState!.validate()) {
-                        Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(builder: (context) => HomePage()
-                        ),
-                        (Route<dynamic> route) =>
-                            false, // This condition removes all routes below the new one.
-                      );
-                      // context.go('/home');
+                      try {
+                        UserCredential userCredential = await AuthService
+                            .instance
+                            .signInWithEmailAndPassword(
+                          email: _emailController.text.trim(),
+                          password: _passwordController.text.trim(),
+                        );
+                        if (userCredential.user != null) {
+                          _showSnackBar('Sign in successful!', isError: false);
+                          // Navigate to home page and remove all previous routes
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const HomePage()),
+                            (Route<dynamic> route) => false,
+                          );
+                        }
+                      } catch (e) {
+                        _showSnackBar(e.toString());
+                      }
                     }
                   },
                   text: 'Sign In',
@@ -121,14 +176,14 @@ class _SignInViewState extends State<SignInView> {
                     children: [
                       TextSpan(
                         text: 'Sign Up',
-                        recognizer: TapGestureRecognizer()..onTap = () {
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) => SignUpView()),
-                          context.go('/sign_up'
-                            );
-                        },
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SignUpView()));
+                            // context.go('/sign_up');
+                          },
                         style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w700,
@@ -145,15 +200,54 @@ class _SignInViewState extends State<SignInView> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     CustomSocialButton(
-                      onTap: () {},
+                      onTap: () async {
+                        try {
+                          UserCredential? userCredential =
+                              await AuthService.instance.signInWithGoogle();
+                          if (userCredential != null &&
+                              userCredential.user != null) {
+                            _showSnackBar('Signed in with Google!',
+                                isError: false);
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const HomePage()),
+                              (Route<dynamic> route) => false,
+                            );
+                          }
+                        } catch (e) {
+                          _showSnackBar(e.toString());
+                        }
+                      },
                       icon: AppAssets.kGoogle,
                     ),
                     CustomSocialButton(
-                      onTap: () {},
+                      // onTap: () {},
+                      onTap: () {
+                        _showSnackBar('Apple Sign-In not implemented.');
+                      },
                       icon: AppAssets.kApple,
                     ),
                     CustomSocialButton(
-                      onTap: () {},
+                      onTap: () async {
+                        // try {
+                        //   UserCredential? userCredential =
+                        //       await AuthService.instance.signInWithFacebook();
+                        //   if (userCredential != null &&
+                        //       userCredential.user != null) {
+                        //     _showSnackBar('Signed in with Facebook!',
+                        //         isError: false);
+                        //     Navigator.pushAndRemoveUntil(
+                        //       context,
+                        //       MaterialPageRoute(
+                        //           builder: (context) => const HomePage()),
+                        //       (Route<dynamic> route) => false,
+                        //     );
+                        //   }
+                        // } catch (e) {
+                        //   _showSnackBar(e.toString());
+                        // }
+                      },
                       icon: AppAssets.kFacebook,
                     ),
                   ],

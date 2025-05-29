@@ -1,8 +1,4 @@
-// features/favorites/widgets/favorite_icon_widget.dart
-import 'package:flutter/material.dart';
-import 'package:hero_anim/features/core/model/destination_model.dart';
-import 'package:hero_anim/features/core/provider/favorites_provider.dart';
-import 'package:provider/provider.dart';
+import 'package:travel_ease/imports.dart';
 
 class FavoriteIconWidget extends StatelessWidget {
   final Destination destination;

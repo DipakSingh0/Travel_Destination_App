@@ -24,7 +24,7 @@ class ListItem extends StatelessWidget {
       contentPadding: const EdgeInsets.all(10),
       leading: imageUrl != null
           ? Hero(
-              tag: heroTag ?? 'list_item_hero_$title',
+              tag:  'destination_hero_$title',
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: Image.asset(

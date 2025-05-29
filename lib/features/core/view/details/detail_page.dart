@@ -1,7 +1,5 @@
-import 'package:hero_anim/features/core/view/details/widget/detail_header.dart';
-import 'package:hero_anim/features/core/view/details/widget/detail_info_section.dart';
-import 'package:hero_anim/features/core/view/details/widget/details_action.dart';
-import 'package:hero_anim/imports.dart';
+
+import 'package:travel_ease/imports.dart';
 
 class DetailPage extends StatefulWidget {
   final Destination destination;

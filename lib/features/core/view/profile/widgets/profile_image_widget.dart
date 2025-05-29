@@ -1,4 +1,4 @@
-import 'package:hero_anim/imports.dart';
+import 'package:travel_ease/imports.dart';
 
 class ProfileImage extends StatelessWidget {
   final String imagePath;

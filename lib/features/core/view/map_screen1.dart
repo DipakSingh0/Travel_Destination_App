@@ -1,8 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:hero_anim/imports.dart';
-import 'package:hero_anim/features/core/provider/map_controller.dart';
+import 'package:travel_ease/imports.dart';
+import 'package:travel_ease/features/core/provider/map_controller.dart';
 
 class MapScreen extends StatefulWidget {
   final Destination? destination;
@@ -88,6 +88,7 @@ class _MapScreenState extends State<MapScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.mapTitle),
+        centerTitle: true,
         actions: [
           IconButton(
             icon: Icon(

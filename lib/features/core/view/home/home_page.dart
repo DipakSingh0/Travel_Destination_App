@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
-
-import 'package:hero_anim/imports.dart';
+import 'package:travel_ease/imports.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -24,19 +23,23 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         appBar: _currentIndex == 0
             ? MyAppBar(
-                title: "Travel Destination",
+                title: "Travel Destination", 
                 actions: [
                   Padding(
                     padding: const EdgeInsets.only(right: 8.0),
                     child: GestureDetector(
                       onTap: () {
                         // Ensure we're mounted before navigating
-                        if (mounted) {
-                          // Add a small delay to ensure the Hero widget is ready
-                          Future.microtask(() {
-                            context.push('/profile');
-                          });
-                        }
+                        // if (mounted) {
+                        // Add a small delay to ensure the Hero widget is ready
+                        // Future.microtask(() {
+                        //   context.push('/profile');
+                        // });
+                        // }
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProfilePage()));
                       },
                       child: CircleAvatar(
                         radius: 20, // Smaller radius for app bar
@@ -54,8 +57,7 @@ class _HomePageState extends State<HomePage> {
                 profileImageUrl: "assets/images/profile.jpg",
               )
             : null,
-        body:
-            KeyedSubtree(
+        body: KeyedSubtree(
           key: ValueKey<int>(_currentIndex),
           child: _pages[_currentIndex],
         ),

@@ -1,4 +1,6 @@
-import 'package:hero_anim/imports.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:travel_ease/features/auth/services/auth_service.dart';
+import 'package:travel_ease/imports.dart';
 
 class SignUpView extends StatefulWidget {
   const SignUpView({super.key});
@@ -12,6 +14,27 @@ class _SignUpViewState extends State<SignUpView> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  
+  
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+    // Helper function to show a snackbar
+  void _showSnackBar(String message, {bool isError = true}) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: isError ? Colors.red : Colors.green,
+      ),
+    );
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,13 +120,25 @@ class _SignUpViewState extends State<SignUpView> {
                 ),
                 const SizedBox(height: 30),
                 PrimaryButton(
-                  onTap: () {
+                     onTap: () async {
                     if (_formKey.currentState!.validate()) {
-                      //   Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(builder: (context) => SignInView()),
-                      // );
-                      context.go('/sign_in');
+                      try {
+                        UserCredential userCredential = await AuthService
+                            .instance
+                            .registerWithEmailAndPassword(
+                          email: _emailController.text.trim(),
+                          password: _passwordController.text.trim(),
+                          fullName: _nameController.text.trim(),
+                        );
+                        if (userCredential.user != null) {
+                          _showSnackBar(
+                              'Registration successful! Please sign in.',
+                              isError: false);
+                          context.go('/sign_in'); // Navigate to sign-in page
+                        }
+                      } catch (e) {
+                        _showSnackBar(e.toString());
+                      }
                     }
                   },
                   text: 'Create An Account',
@@ -115,15 +150,53 @@ class _SignUpViewState extends State<SignUpView> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     CustomSocialButton(
-                      onTap: () {},
+                       onTap: () async {
+                        try {
+                          UserCredential? userCredential =
+                              await AuthService.instance.signInWithGoogle();
+                          if (userCredential != null &&
+                              userCredential.user != null) {
+                            _showSnackBar('Signed in with Google!',
+                                isError: false);
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const HomePage()),
+                              (Route<dynamic> route) => false,
+                            );
+                          }
+                        } catch (e) {
+                          _showSnackBar(e.toString());
+                        }
+                      },
                       icon: AppAssets.kGoogle,
                     ),
                     CustomSocialButton(
-                      onTap: () {},
+                      onTap: () {
+                        _showSnackBar('Apple Sign-In not implemented.');
+                      },
                       icon: AppAssets.kApple,
                     ),
                     CustomSocialButton(
-                      onTap: () {},
+                        onTap: () async {
+                        // try {
+                        //   UserCredential? userCredential =
+                        //       await AuthService.instance.signInWithFacebook();
+                        //   if (userCredential != null &&
+                        //       userCredential.user != null) {
+                        //     _showSnackBar('Signed in with Facebook!',
+                        //         isError: false);
+                        //     Navigator.pushAndRemoveUntil(
+                        //       context,
+                        //       MaterialPageRoute(
+                        //           builder: (context) => const HomePage()),
+                        //       (Route<dynamic> route) => false,
+                        //     );
+                        //   }
+                        // } catch (e) {
+                        //   _showSnackBar(e.toString());
+                        // }
+                      },
                       icon: AppAssets.kFacebook,
                     ),
                   ],

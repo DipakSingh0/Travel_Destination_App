@@ -1,4 +1,4 @@
-import 'package:hero_anim/imports.dart';
+import 'package:travel_ease/imports.dart';
 
 class CategoriesPage extends StatelessWidget {
   const CategoriesPage({super.key});
@@ -20,19 +20,31 @@ class CategoriesPage extends StatelessWidget {
         latitude: categoryItem.latitude,
         longitude: categoryItem.longitude,
       );
-      
-      context.push(
-        Uri(
-          path: '/details',
-          queryParameters: {
-            'category': category,
-            'item': item,
-          },
-        ).toString(),
-        extra: destination,
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => DetailPage(
+            destination: destination,
+            categoryName: category,
+            itemName: item,
+          ),
+        ),
       );
+      
+      // context.push(
+      //   Uri(
+      //     path: '/details',
+      //     queryParameters: {
+      //       'category': category,
+      //       'item': item,
+      //     },
+      //   ).toString(),
+      //   extra: destination,
+      // );
     }
   }
+  
 
   @override
   Widget build(BuildContext context) {

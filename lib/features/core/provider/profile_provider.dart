@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:hero_anim/features/core/model/profile_model.dart';
+import 'package:travel_ease/features/core/model/profile_model.dart';
 
 class ProfileProvider with ChangeNotifier {
   late Box<Profile> _profileBox;

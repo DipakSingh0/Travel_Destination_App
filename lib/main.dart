@@ -1,54 +1,18 @@
-// GoRouter configuration
 import 'package:flutter_stripe/flutter_stripe.dart';
-import 'package:hero_anim/features/auth/view/sign_in/sign_in_view.dart';
-import 'package:hero_anim/imports.dart';
-import 'package:hero_anim/features/core/view/map_screen1.dart';
-
-final _router = GoRouter(
-  initialLocation: '/',
-  routes: [
-    //  GoRoute(
-    //   path: '/',
-    //   builder: (context, state) => const WelcomeScreen(),
-    // ),
-    GoRoute(
-      path: '/',
-      builder: (context, state) => const HomePage(),
-    ),
-    GoRoute(
-      path: '/sign_up',
-      builder: (context, state) => const SignUpView(),
-    ),
-    GoRoute(
-      path: '/sign_in',
-      builder: (context, state) => const SignInView(),
-    ),
-    GoRoute(
-      path: '/map',
-      builder: (context, state) =>  MapScreen(),
-    ),
-    GoRoute(
-      path: '/profile',
-      builder: (context, state) => const ProfilePage(),
-    ),
-     
-    GoRoute(
-      path: '/details',
-      builder: (context, state) {
-        final destination = state.extra as Destination;
-        final params = state.uri.queryParameters;
-        return DetailPage(
-          destination: destination,
-          categoryName: params['category'],
-          itemName: params['item'],
-        );
-      },
-    ),
-  ],
-);
+import 'package:travel_ease/features/auth/view/welcome/welcome_screen.dart';
+// import 'package:travel_ease/go_router.dart';
+import 'package:travel_ease/imports.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'features/core/services/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+
+  // Initialize Firebase
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   try {
     Stripe.publishableKey = stripePublishableKey;
@@ -57,16 +21,18 @@ void main() async {
     debugPrint('Stripe initialization failed: $e');
   }
 
-  // Initialize Hive
+  // ---- Initializing Hive
   await Hive.initFlutter();
 
-  // Register adapter
+  // ------Register adapter
   Hive.registerAdapter(DestinationAdapter());
-  // Open favorites box
+  // ------Open favorites box
   await Hive.openBox<Destination>('favorites');
 
   Hive.registerAdapter(ProfileAdapter());
   await Hive.openBox<Profile>('profiles');
+
+// GoRouter configuration
 
   runApp(
     MultiProvider(
@@ -98,17 +64,32 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  // @override
+  // Widget build(BuildContext context) {
+  //   return MaterialApp.router(
+  //     title: 'TravelEase',
+  //     debugShowCheckedModeBanner: false,
+  //     checkerboardOffscreenLayers: true,
+  //     theme: ThemeData(
+  //       primarySwatch: Colors.blue,
+  //       useMaterial3: false,
+  //     ),
+  //     routerConfig: router,
+  //   );
+  // }
+
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: 'Destination App',
+    return MaterialApp(
+      title: 'TravelEase',
       debugShowCheckedModeBanner: false,
-      checkerboardOffscreenLayers: true,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        useMaterial3: false,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
       ),
-      routerConfig: _router,
+      // home: const HomePage(),
+      home: WelcomeScreen()
     );
   }
 }

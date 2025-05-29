@@ -1,5 +1,4 @@
-
-import 'package:hero_anim/imports.dart';
+import 'package:travel_ease/imports.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -23,10 +22,10 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(title , style: TextStyle(fontSize: 25 , fontWeight: FontWeight.w500),),
+      title: Text(title , style: TextStyle( color: Colors.white,  fontSize: 25 , fontWeight: FontWeight.w500),),
       centerTitle: centerTitle,
       backgroundColor: backgroundColor,
-      leading: leading,
+      leading: leading, 
       actions: actions,
     );
   }

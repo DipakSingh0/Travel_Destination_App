@@ -19,7 +19,7 @@
     
     
     <application
-        android:label="hero_anim"
+        android:label="TravelEase"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

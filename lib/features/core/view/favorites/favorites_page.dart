@@ -1,4 +1,4 @@
-import 'package:hero_anim/imports.dart';
+import 'package:travel_ease/imports.dart';
 
 class FavoritePage extends StatelessWidget {
   const FavoritePage({super.key});
@@ -30,6 +30,8 @@ class FavoritePage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                   child: Hero(
                    tag: 'destination_hero_${destination.imageUrl}',
+          // tag: 'destination_hero_${destination.name}',
+
                     child: Image.asset(
                             destination.imageUrl,
                             width: 80,
@@ -61,13 +63,13 @@ class FavoritePage extends StatelessWidget {
                   ],
                 ),
                 onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (_) => DetailPage(destination: destination),
-                  //   ),
-                  // );
-                  context.push('/details', extra: destination);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => DetailPage(destination: destination),
+                    ),
+                  );
+                  // context.push('/details', extra: destination);
 
                 },
               );

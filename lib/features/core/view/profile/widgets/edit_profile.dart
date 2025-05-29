@@ -1,9 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:flutter/material.dart';
+
 import 'package:image_picker/image_picker.dart';
-import 'package:hero_anim/features/core/model/profile_model.dart';
-import 'package:hero_anim/features/core/view/profile/widgets/profile_image_widget.dart';
+import 'package:travel_ease/imports.dart';
 
 class EditProfileDialog extends StatefulWidget {
   final Profile initialProfile;

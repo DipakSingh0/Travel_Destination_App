@@ -1,7 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:hero_anim/features/core/services/stripe_services.dart';
-import 'package:hero_anim/imports.dart';
+import 'package:travel_ease/features/core/services/stripe_services.dart';
+import 'package:travel_ease/imports.dart';
 
 class DetailActions extends StatelessWidget {
   final Destination destination;
@@ -27,16 +27,16 @@ class DetailActions extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.all(1),
               decoration: BoxDecoration(
-                color: Colors.grey[200],
-                shape: BoxShape.circle,
+                // color: Colors.grey[200],
+                shape: BoxShape.circle, 
               ),
               child: Consumer<FavoritesProvider>(
                 builder: (context, favoritesProvider, child) {
                   return FavoriteIconWidget(
                     destination: destination,
-                    size: 32,
+                    size: 35,
                   );
                 },
               ),
@@ -47,10 +47,12 @@ class DetailActions extends StatelessWidget {
                 text: 'Book now',
                 onTap: () async {
                   try {
+                    //-----calling makePayment with destination object
                     await StripeService.instance.makePayment(
-                      amount: 100,
+                      // amount: 100,
                       currency: 'USD',
-                      description: 'Booking for ${destination.name}',
+                      destination: destination,
+                      // description: 'Booking for ${destination.name}',
                     );
 
                     // Show success message
@@ -74,7 +76,7 @@ class DetailActions extends StatelessWidget {
                 color: Colors.blue,
                 borderRadius: 30.0,
                 fontSize: 20.0,
-                height: 50.0,
+                height: 60.0,
               ),
             ),
           ],

@@ -1,4 +1,4 @@
-import 'package:hero_anim/imports.dart';
+import 'package:travel_ease/imports.dart';
 
 class CategoryExpansionTile extends StatelessWidget {
   final Category category;
@@ -24,6 +24,7 @@ class CategoryExpansionTile extends StatelessWidget {
         return ListItem(
           title: item.name,
           subtitle: '${category.name} destination',
+          //--------------
         //  trailing: Row(
         //               children: [
         //                 Text(category.rating.toString()),

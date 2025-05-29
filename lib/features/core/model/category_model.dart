@@ -29,4 +29,6 @@ class Category {
     required this.name,
     required this.items,
   });
+
+  get rating => null;
 }

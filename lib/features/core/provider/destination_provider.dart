@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hero_anim/common/utils/assets.dart';
-import 'package:hero_anim/features/core/model/destination_model.dart';
+import 'package:travel_ease/common/utils/assets.dart';
+import 'package:travel_ease/features/core/model/destination_model.dart';
 import 'package:hive/hive.dart';
 
 class DestinationProvider with ChangeNotifier {

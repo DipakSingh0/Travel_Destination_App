@@ -1,4 +1,4 @@
-import 'package:hero_anim/imports.dart';
+import 'package:travel_ease/imports.dart';
 
 class DetailHeader extends StatelessWidget {
   final String imageUrl;
@@ -15,6 +15,8 @@ class DetailHeader extends StatelessWidget {
       children: [
         Hero(
           tag: heroTag,
+          // tag: destination_hero_${destination.imageUrl},
+          // tag: 'destination_hero_${destination.name}',
           child: ClipRRect(
             borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(20.0),

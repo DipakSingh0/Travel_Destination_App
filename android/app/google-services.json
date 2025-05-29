@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "477776670675",
+    "project_id": "authentication-5671f",
+    "storage_bucket": "authentication-5671f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:477776670675:android:86a958274962318b0cc926",
+        "android_client_info": {
+          "package_name": "com.example.hero_anim"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "477776670675-7fl411tb4uf9c43rvfnqp8vkahdbga39.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9vWSHW-nLUn7IgfODgRARIRn9geRaPm8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "477776670675-7fl411tb4uf9c43rvfnqp8vkahdbga39.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "477776670675-9vcef70q8pog977qaqqvm08g3m4drneb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.heroAnim"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:477776670675:android:599c8437cdea3b440cc926",
+        "android_client_info": {
+          "package_name": "com.example.music"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "477776670675-u9usjldriiv6mpsbeml3ub5195g8ic1v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.music",
+            "certificate_hash": "a7bfab3828d4427d1073a43aad39a7ffb5e20b60"
+          }
+        },
+        {
+          "client_id": "477776670675-7fl411tb4uf9c43rvfnqp8vkahdbga39.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9vWSHW-nLUn7IgfODgRARIRn9geRaPm8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "477776670675-7fl411tb4uf9c43rvfnqp8vkahdbga39.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "477776670675-9vcef70q8pog977qaqqvm08g3m4drneb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.heroAnim"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

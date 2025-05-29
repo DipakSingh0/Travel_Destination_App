@@ -1,5 +1,5 @@
-name: hero_anim
-description: "A new Flutter project."
+name: travel_ease
+description: "A Travel Destination App."
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
@@ -29,7 +29,12 @@ dependencies:
   dio: ^5.8.0+1
 
   google_maps_flutter: ^2.12.2
-  geolocator: ^14.0.0
+  geolocator: ^14.0.1
+  google_sign_in: ^6.3.0
+  firebase_auth: ^5.5.4
+  flutter_facebook_auth: ^7.1.2
+  flutter_secure_storage: ^9.2.4
+  firebase_core: ^3.13.1
 
   
 

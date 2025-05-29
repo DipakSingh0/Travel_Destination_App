@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:hero_anim/common/utils/assets.dart';
-import 'package:hero_anim/features/core/model/profile_model.dart';
+
+import 'package:travel_ease/imports.dart';
 
 class ProfileHeader extends StatelessWidget {
   final Profile profile;

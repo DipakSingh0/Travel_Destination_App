@@ -1,5 +1,5 @@
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:hero_anim/features/core/model/destination_model.dart';
+import 'package:travel_ease/features/core/model/destination_model.dart';
 import '../services/map_service.dart';
 
 class MapController {
