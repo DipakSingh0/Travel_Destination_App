@@ -1,9 +1,9 @@
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:travel_ease/features/auth/view/welcome/welcome_screen.dart';
+import 'package:travel_ease/firebase_options.dart';
 // import 'package:travel_ease/go_router.dart';
 import 'package:travel_ease/imports.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'features/core/services/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

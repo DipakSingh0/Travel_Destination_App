@@ -1,4 +1,4 @@
-package com.example.hero_anim
+package com.example.travel_ease
 
 import io.flutter.embedding.android.FlutterFragmentActivity 
 

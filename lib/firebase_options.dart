@@ -23,7 +23,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
         return macos;
       case TargetPlatform.windows:
@@ -42,49 +45,40 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyD781TSqyP89HDjiFd89YrurUpUnhtMHO8',
-    appId: '1:477776670675:web:93f89a6c941a5c4b0cc926',
+    appId: '1:477776670675:web:9a6539df6ca72d210cc926',
     messagingSenderId: '477776670675',
     projectId: 'authentication-5671f',
     authDomain: 'authentication-5671f.firebaseapp.com',
     storageBucket: 'authentication-5671f.firebasestorage.app',
-    measurementId: 'G-S4RKB75R1C',
+    measurementId: 'G-X81ZB6VC38',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyD9vWSHW-nLUn7IgfODgRARIRn9geRaPm8',
-    appId: '1:477776670675:android:86a958274962318b0cc926',
+    appId: '1:477776670675:android:3d1fc53674a9951d0cc926',
     messagingSenderId: '477776670675',
     projectId: 'authentication-5671f',
     storageBucket: 'authentication-5671f.firebasestorage.app',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyB9tptd8wiIupetJfvZkYCm0IWh8lCkAZc',
-    appId: '1:477776670675:ios:d9b7ec2a17e29fe70cc926',
-    messagingSenderId: '477776670675',
-    projectId: 'authentication-5671f',
-    storageBucket: 'authentication-5671f.firebasestorage.app',
-    iosClientId: '477776670675-9vcef70q8pog977qaqqvm08g3m4drneb.apps.googleusercontent.com',
-    iosBundleId: 'com.example.heroAnim',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyB9tptd8wiIupetJfvZkYCm0IWh8lCkAZc',
-    appId: '1:477776670675:ios:d9b7ec2a17e29fe70cc926',
+    appId: '1:477776670675:ios:ebde59b7ffe271a40cc926',
     messagingSenderId: '477776670675',
     projectId: 'authentication-5671f',
     storageBucket: 'authentication-5671f.firebasestorage.app',
+    androidClientId: '477776670675-u9usjldriiv6mpsbeml3ub5195g8ic1v.apps.googleusercontent.com',
     iosClientId: '477776670675-9vcef70q8pog977qaqqvm08g3m4drneb.apps.googleusercontent.com',
     iosBundleId: 'com.example.heroAnim',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
     apiKey: 'AIzaSyD781TSqyP89HDjiFd89YrurUpUnhtMHO8',
-    appId: '1:477776670675:web:c2c89113847e63240cc926',
+    appId: '1:477776670675:web:39393748b5a851c40cc926',
     messagingSenderId: '477776670675',
     projectId: 'authentication-5671f',
     authDomain: 'authentication-5671f.firebaseapp.com',
     storageBucket: 'authentication-5671f.firebasestorage.app',
-    measurementId: 'G-E16WPW06GJ',
+    measurementId: 'G-HS73C94EKC',
   );
 }
