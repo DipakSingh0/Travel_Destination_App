@@ -15,6 +15,7 @@ class _SignInViewState extends State<SignInView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool _isLoading = false;
   bool isRemember = false;
 
   @override
@@ -24,7 +25,6 @@ class _SignInViewState extends State<SignInView> {
     super.dispose();
   }
 
-  // Helper function to show a snackbar
   void _showSnackBar(String message, {bool isError = true}) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -34,231 +34,267 @@ class _SignInViewState extends State<SignInView> {
     );
   }
 
+  Future<void> _handleSignIn() async {
+    if (_formKey.currentState!.validate()) {
+      setState(() => _isLoading = true);
+      try {
+        UserCredential userCredential = await AuthService.instance
+            .signInWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+        );
+        if (userCredential.user != null) {
+          _showSnackBar('Sign in successful!', isError: false);
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => const HomePage()),
+            (Route<dynamic> route) => false,
+          );
+        }
+      } catch (e) {
+        _showSnackBar(e.toString());
+      } finally {
+        setState(() => _isLoading = false);
+      }
+    }
+  }
+
+  Future<void> _handleGoogleSignIn() async {
+    setState(() => _isLoading = true);
+    try {
+      UserCredential? userCredential = await AuthService.instance.signInWithGoogle();
+      if (userCredential != null && userCredential.user != null) {
+        _showSnackBar('Signed in with Google!', isError: false);
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+          (Route<dynamic> route) => false,
+        );
+      }
+    } catch (e) {
+      _showSnackBar(e.toString());
+    } finally {
+      setState(() => _isLoading = false);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.kWhite,
-      // appBar: AppBar(
-      //     backgroundColor: AppColors.kWhite,
-      //     elevation: 0,
-      //     leading: const BackButton(
-      //       color: AppColors.kBlue,
-      //     )),
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        padding: const EdgeInsets.all(20),
-        child: Form(
-          key: _formKey,
-          child: Center(
-            child: Column(
-              children: [
-                const SizedBox(height: 100),
-                const Text('Let’s Sign you in',
-                    style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black)),
-                const SizedBox(height: 10),
-                const Text(
-                  'Connect with Us!',
-                  style: TextStyle(fontSize: 14, color: AppColors.kGrey60),
-                ),
-                const SizedBox(height: 30),
-                // Email Field.
-                AuthField(
-                  title: 'Email Address',
-                  hintText: 'Enter your email address',
-                  controller: _emailController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Email is required';
-                    } else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-                        .hasMatch(value)) {
-                      return 'Invalid email address';
-                    }
-                    return null;
-                  },
-                  keyboardType: TextInputType.emailAddress,
-                  textInputAction: TextInputAction.next,
-                ),
-                const SizedBox(height: 15),
-                // Password Field.
-                AuthField(
-                  title: 'Password',
-                  hintText: 'Enter your password',
-                  controller: _passwordController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Password is required';
-                    } else if (value.length < 8) {
-                      return 'Password should be at least 8 characters long';
-                    }
-                    return null;
-                  },
-                  isPassword: true,
-                  keyboardType: TextInputType.visiblePassword,
-                  textInputAction: TextInputAction.done,
-                ),
-                const SizedBox(height: 5),
-                Row(
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            padding: const EdgeInsets.all(20),
+            child: Form(
+              key: _formKey,
+              child: Center(
+                child: Column(
                   children: [
-                    RememberMeCard(
-                      onChanged: (value) {
-                        setState(() {
-                          isRemember = value;
-                        });
+                    const _HeaderText(),
+                    _FormFields(
+                      emailController: _emailController,
+                      passwordController: _passwordController,
+                      isRemember: isRemember,
+                      onRememberChanged: (value) {
+                        setState(() => isRemember = value);
                       },
                     ),
-                    const Spacer(),
-                    CustomTextButton(
-                      onPressed: () {},
-                      text: 'Forget Password',
+                    const SizedBox(height: 15),
+                    PrimaryButton(
+                      onTap: _handleSignIn,
+                      text: 'Sign In',
+                      // isLoading: _isLoading,
                     ),
-
-                    //  CustomTextButton(
-                    //   onPressed: () async {
-                    //     // Handle Forgot Password
-                    //     final String email = _emailController.text.trim();
-                    //     if (email.isEmpty) {
-                    //       _showSnackBar(
-                    //           'Please enter your email to reset password.');
-                    //       return;
-                    //     }
-                    //     try {
-                    //       await AuthService.instance
-                    //           .sendPasswordResetEmail(email);
-                    //       _showSnackBar('Password reset email sent!',
-                    //           isError: false);
-                    //     } catch (e) {
-                    //       _showSnackBar(e.toString());
-                    //     }
-                    //   },
-                    //   text: 'Forget Password',
-                    // ),
-                  ],
-                ),
-                const SizedBox(height: 15),
-                PrimaryButton(
-                  onTap: () async {
-                    if (_formKey.currentState!.validate()) {
-                      try {
-                        UserCredential userCredential = await AuthService
-                            .instance
-                            .signInWithEmailAndPassword(
-                          email: _emailController.text.trim(),
-                          password: _passwordController.text.trim(),
+                    const SizedBox(height: 20),
+                    _BottomActionButtons(
+                      onSignUpPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => SignUpView()),
                         );
-                        if (userCredential.user != null) {
-                          _showSnackBar('Sign in successful!', isError: false);
-                          // Navigate to home page and remove all previous routes
-                          Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const HomePage()),
-                            (Route<dynamic> route) => false,
-                          );
-                        }
-                      } catch (e) {
-                        _showSnackBar(e.toString());
-                      }
-                    }
-                  },
-                  text: 'Sign In',
-                ),
-                const SizedBox(height: 20),
-                RichText(
-                  text: TextSpan(
-                    text: 'Don’t have an account? ',
-                    style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black),
-                    children: [
-                      TextSpan(
-                        text: 'Sign Up',
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SignUpView()));
-                            // context.go('/sign_up');
-                          },
-                        style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
-                            color: AppColors.kBlue),
-                      ),
-                    ],
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 20),
-                const TextWithDivider(),
-                const SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    CustomSocialButton(
-                      onTap: () async {
-                        try {
-                          UserCredential? userCredential =
-                              await AuthService.instance.signInWithGoogle();
-                          if (userCredential != null &&
-                              userCredential.user != null) {
-                            _showSnackBar('Signed in with Google!',
-                                isError: false);
-                            Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const HomePage()),
-                              (Route<dynamic> route) => false,
-                            );
-                          }
-                        } catch (e) {
-                          _showSnackBar(e.toString());
-                        }
                       },
-                      icon: AppAssets.kGoogle,
-                    ),
-                    CustomSocialButton(
-                      // onTap: () {},
-                      onTap: () {
+                      onGooglePressed: _handleGoogleSignIn,
+                      onApplePressed: () {
                         _showSnackBar('Apple Sign-In not implemented.');
                       },
-                      icon: AppAssets.kApple,
-                    ),
-                    CustomSocialButton(
-                      onTap: () async {
-                        // try {
-                        //   UserCredential? userCredential =
-                        //       await AuthService.instance.signInWithFacebook();
-                        //   if (userCredential != null &&
-                        //       userCredential.user != null) {
-                        //     _showSnackBar('Signed in with Facebook!',
-                        //         isError: false);
-                        //     Navigator.pushAndRemoveUntil(
-                        //       context,
-                        //       MaterialPageRoute(
-                        //           builder: (context) => const HomePage()),
-                        //       (Route<dynamic> route) => false,
-                        //     );
-                        //   }
-                        // } catch (e) {
-                        //   _showSnackBar(e.toString());
-                        // }
+                      onFacebookPressed: () {
+                        _showSnackBar('Facebook Sign-In not implemented.');
                       },
-                      icon: AppAssets.kFacebook,
                     ),
+                    const SizedBox(height: 20),
+                    const AgreeTermsTextCard(),
                   ],
                 ),
-                const SizedBox(height: 20),
-                const AgreeTermsTextCard(),
-              ],
+              ),
             ),
           ),
-        ),
+          if (_isLoading)
+            const Center(child: CircularProgressIndicator()),
+        ],
       ),
+    );
+  }
+}
+
+class _HeaderText extends StatelessWidget {
+  const _HeaderText();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Column(
+      children: [
+        SizedBox(height: 100),
+        Text(
+          "Let’s Sign you in",
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
+        SizedBox(height: 10),
+        Text(
+          "Connect with Us!",
+          style: TextStyle(fontSize: 14, color: AppColors.kGrey60),
+        ),
+        SizedBox(height: 30),
+      ],
+    );
+  }
+}
+
+class _FormFields extends StatelessWidget {
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
+  final bool isRemember;
+  final ValueChanged<bool> onRememberChanged;
+
+  const _FormFields({
+    required this.emailController,
+    required this.passwordController,
+    required this.isRemember,
+    required this.onRememberChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        // Email Field
+        AuthField(
+          title: 'Email Address',
+          hintText: 'Enter your email address',
+          controller: emailController,
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Email is required';
+            } else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                .hasMatch(value)) {
+              return 'Invalid email address';
+            }
+            return null;
+          },
+          keyboardType: TextInputType.emailAddress,
+          textInputAction: TextInputAction.next,
+        ),
+        const SizedBox(height: 15),
+        // Password Field
+        AuthField(
+          title: 'Password',
+          hintText: 'Enter your password',
+          controller: passwordController,
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Password is required';
+            } else if (value.length < 8) {
+              return 'Password should be at least 8 characters long';
+            }
+            return null;
+          },
+          isPassword: true,
+          keyboardType: TextInputType.visiblePassword,
+          textInputAction: TextInputAction.done,
+        ),
+        const SizedBox(height: 5),
+        Row(
+          children: [
+            RememberMeCard(
+              onChanged: onRememberChanged,
+            ),
+            const Spacer(),
+            CustomTextButton(
+              onPressed: () {},
+              text: 'Forget Password',
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _BottomActionButtons extends StatelessWidget {
+  final VoidCallback onSignUpPressed;
+  final VoidCallback onGooglePressed;
+  final VoidCallback onApplePressed;
+  final VoidCallback onFacebookPressed;
+
+  const _BottomActionButtons({
+    required this.onSignUpPressed,
+    required this.onGooglePressed,
+    required this.onApplePressed,
+    required this.onFacebookPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        RichText(
+          text: TextSpan(
+            text: "Don't have an account? ",
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w700,
+              color: Colors.black,
+            ),
+            children: [
+              TextSpan(
+                text: "Sign Up",
+                recognizer: TapGestureRecognizer()..onTap = onSignUpPressed,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.kBlue,
+                ),
+              ),
+            ],
+          ),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 20),
+        const TextWithDivider(),
+        const SizedBox(height: 20),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            CustomSocialButton(
+              onTap: onGooglePressed,
+              icon: AppAssets.kGoogle,
+            ),
+            CustomSocialButton(
+              onTap: onApplePressed,
+              icon: AppAssets.kApple,
+            ),
+            CustomSocialButton(
+              onTap: onFacebookPressed,
+              icon: AppAssets.kFacebook,
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

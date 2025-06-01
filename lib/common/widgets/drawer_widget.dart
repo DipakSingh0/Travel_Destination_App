@@ -17,7 +17,7 @@ class DrawerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final settingsProvider = Provider.of<SettingsProvider>(context);
-
+    //  final authProvider = Provider.of<AuthProvider>(context, listen: false);
     return Drawer(
       child: Column(
         // mainAxisAlignment: MainAxisAlignment.center,
@@ -40,21 +40,21 @@ class DrawerWidget extends StatelessWidget {
                 ),
                 accountEmail: Text(userEmail),
                 currentAccountPicture:
-                // creating animation between pages with hero widget tag-profile_image
-                // adding this to drawer too where we want animation
-                // Hero(
-                //   tag: 'profile_image',
-                //   child: ProfileImage(
-                //     imagePath: profileImage,
-                //     radius: 45,
-                //     onTap: onProfileTap,
-                //   ),
-                // ),
-                 ProfileImage(
-                   imagePath: profileImage,
-                   radius: 45,
-                   onTap: onProfileTap,
-                 ),
+                    // creating animation between pages with hero widget tag-profile_image
+                    // adding this to drawer too where we want animation
+                    // Hero(
+                    //   tag: 'profile_image',
+                    //   child: ProfileImage(
+                    //     imagePath: profileImage,
+                    //     radius: 45,
+                    //     onTap: onProfileTap,
+                    //   ),
+                    // ),
+                    ProfileImage(
+                  imagePath: profileImage,
+                  radius: 45,
+                  onTap: onProfileTap,
+                ),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
@@ -76,14 +76,13 @@ class DrawerWidget extends StatelessWidget {
             title: const Text('Profile'),
             onTap: () {
               // Navigator.pop(context); // Close drawer first
-              // Navigator.push(
-              //     context,
-              //     CustomPageRoute(
-              //       builder: (_) => ProfilePage(),
-              //     ));
-              context.push('/profile');
+              Navigator.push(
+                  context,
+                  CustomPageRoute(
+                    builder: (_) => ProfilePage(),
+                  ));
+              // context.push('/profile');
             },
-
           ),
           ListTile(
             leading: const Icon(Icons.settings),
@@ -123,13 +122,37 @@ class DrawerWidget extends StatelessWidget {
             ),
           ),
           const Divider(),
-          ListTile(
+
+         ListTile(
             leading: const Icon(Icons.exit_to_app),
             title: const Text('Logout'),
-            onTap: () {
-              Navigator.pop(context);
+            onTap: () async {
+              Navigator.pop(context); // Close drawer first
+
+              final shouldLogout = await showDialog<bool>(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: const Text('Logout'),
+                  content: const Text('Are you sure you want to logout?'),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, false),
+                      child: const Text('Cancel'),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, true),
+                      child: const Text('Logout'),
+                    ),
+                  ],
+                ),
+              );
+
+              if (shouldLogout == true) {
+                await Provider.of<SignOutProvider>(context, listen: false)
+                    .logoutUser(context);
+              }
             },
-          ),
+          )
         ],
       ),
     );

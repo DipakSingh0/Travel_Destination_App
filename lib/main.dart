@@ -1,7 +1,6 @@
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:travel_ease/features/auth/view/welcome/welcome_screen.dart';
 import 'package:travel_ease/firebase_options.dart';
-// import 'package:travel_ease/go_router.dart';
 import 'package:travel_ease/imports.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -13,7 +12,6 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
   try {
     Stripe.publishableKey = stripePublishableKey;
     await Stripe.instance.applySettings();
@@ -32,11 +30,16 @@ void main() async {
   Hive.registerAdapter(ProfileAdapter());
   await Hive.openBox<Profile>('profiles');
 
-// GoRouter configuration
+  // Initializing AuthProvider and loading user state
+  final authProvider = AuthProvider();
+  await authProvider.loadUser();
+
 
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider<AuthProvider>.value(value: authProvider),
+        ChangeNotifierProvider(create: (_) => SignOutProvider()),
         ChangeNotifierProvider(
           create: (_) {
             final provider = DestinationProvider();
@@ -88,8 +91,16 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      // home: const HomePage(),
-      home: WelcomeScreen()
+      home: const SignInView(),
+      // home: Consumer<AuthProvider>(
+      //   builder: (context, authProvider, child) {
+      //     if (authProvider.user != null) {
+      //       return HomePage();
+      //     } else {
+      //       return WelcomeScreen();
+      //     }
+      //   },
+      // ),
     );
   }
 }
