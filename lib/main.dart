@@ -1,7 +1,7 @@
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:travel_ease/features/auth/view/welcome/welcome_screen.dart';
-import 'package:travel_ease/firebase_options.dart';
-import 'package:travel_ease/imports.dart';
+import 'package:travel_ease/features/core/services/firebase_options.dart';
+import 'package:travel_ease/common/utils/imports.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {

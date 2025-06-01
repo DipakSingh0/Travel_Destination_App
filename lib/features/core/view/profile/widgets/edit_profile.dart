@@ -1,8 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
-
-
 import 'package:image_picker/image_picker.dart';
-import 'package:travel_ease/imports.dart';
+import 'package:travel_ease/common/utils/imports.dart';
 
 class EditProfileDialog extends StatefulWidget {
   final Profile initialProfile;

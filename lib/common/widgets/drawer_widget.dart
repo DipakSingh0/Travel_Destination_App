@@ -1,4 +1,4 @@
-import 'package:travel_ease/imports.dart';
+import 'package:travel_ease/common/utils/imports.dart';
 
 class DrawerWidget extends StatelessWidget {
   final String userName;
@@ -122,8 +122,7 @@ class DrawerWidget extends StatelessWidget {
             ),
           ),
           const Divider(),
-
-         ListTile(
+   ListTile(
             leading: const Icon(Icons.exit_to_app),
             title: const Text('Logout'),
             onTap: () async {
@@ -132,8 +131,8 @@ class DrawerWidget extends StatelessWidget {
               final shouldLogout = await showDialog<bool>(
                 context: context,
                 builder: (context) => AlertDialog(
-                  title: const Text('Logout'),
-                  content: const Text('Are you sure you want to logout?'),
+                  title: const Text('Confirm Logout'),
+                  content: const Text('Are you sure you want to log out?'),
                   actions: [
                     TextButton(
                       onPressed: () => Navigator.pop(context, false),
@@ -141,18 +140,69 @@ class DrawerWidget extends StatelessWidget {
                     ),
                     TextButton(
                       onPressed: () => Navigator.pop(context, true),
-                      child: const Text('Logout'),
+                      child: const Text(
+                        'Logout',
+                        style: TextStyle(color: Colors.red),
+                      ),
                     ),
                   ],
                 ),
               );
 
               if (shouldLogout == true) {
-                await Provider.of<SignOutProvider>(context, listen: false)
-                    .logoutUser(context);
+                final signOutProvider =
+                    Provider.of<SignOutProvider>(context, listen: false);
+
+                final success = await signOutProvider.signOutUser(context);
+
+                if (success) {
+                  // Navigate to SignInView only if logout is successful
+                  Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (_) => const SignInView()),
+                    (route) => false,
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Logout failed. Please try again.'),
+                      backgroundColor: Colors.redAccent,
+                    ),
+                  );
+                }
               }
             },
           )
+
+        //  ListTile(
+        //     leading: const Icon(Icons.exit_to_app),
+        //     title: const Text('Logout'),
+        //     onTap: () async {
+        //       Navigator.pop(context); // Close drawer first
+
+        //       final shouldLogout = await showDialog<bool>(
+        //         context: context,
+        //         builder: (context) => AlertDialog(
+        //           title: const Text('Logout'),
+        //           content: const Text('Are you sure you want to logout?'),
+        //           actions: [
+        //             TextButton(
+        //               onPressed: () => Navigator.pop(context, false),
+        //               child: const Text('Cancel'),
+        //             ),
+        //             TextButton(
+        //               onPressed: () => Navigator.pop(context, true),
+        //               child: const Text('Logout'),
+        //             ),
+        //           ],
+        //         ),
+        //       );
+
+        //       if (shouldLogout == true) {
+        //         await Provider.of<SignOutProvider>(context, listen: false)
+        //             .logoutUser(context);
+        //       }
+        //     },
+        //   )
         ],
       ),
     );

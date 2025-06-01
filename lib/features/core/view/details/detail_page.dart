@@ -1,6 +1,6 @@
 import 'package:travel_ease/features/core/services/stripe_services.dart';
 import 'package:travel_ease/features/core/view/map_screen1.dart';
-import 'package:travel_ease/imports.dart';
+import 'package:travel_ease/common/utils/imports.dart';
 
 class DetailPage extends StatefulWidget {
   final Destination destination;

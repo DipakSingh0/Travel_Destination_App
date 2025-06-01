@@ -19,7 +19,7 @@ export 'package:travel_ease/features/core/provider/destination_provider.dart';
 export 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 export 'package:travel_ease/common/animation/page_transition_animation.dart';
 export 'package:travel_ease/common/widgets/my_appbar.dart';
-export 'package:travel_ease/imports.dart';
+export 'package:travel_ease/common/utils/imports.dart';
 export 'package:travel_ease/features/core/view/home/widgets/destination_grid_view.dart';
 export 'package:travel_ease/common/widgets/bottom_nav_bar.dart';
 export 'package:travel_ease/common/widgets/drawer_widget.dart';

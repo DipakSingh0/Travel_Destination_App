@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:travel_ease/imports.dart';
+import 'package:travel_ease/common/utils/imports.dart';
 
 class SignUpView extends StatefulWidget {
   const SignUpView({super.key});

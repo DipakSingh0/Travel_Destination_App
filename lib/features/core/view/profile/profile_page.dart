@@ -1,4 +1,5 @@
-import 'package:travel_ease/imports.dart';
+import 'package:travel_ease/common/utils/imports.dart';
+import 'package:travel_ease/features/core/view/profile/widgets/logout_button.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -50,6 +51,8 @@ class ProfilePage extends StatelessWidget {
                   _buildProfileItem(
                       Icons.location_on, 'Address', profile.address),
                   _buildProfileItem(Icons.info, 'Bio', profile.bio),
+                LogoutButtonWidget(),
+
                 ],
               ),
             ),

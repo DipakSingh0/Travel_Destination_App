@@ -1,23 +1,28 @@
-import 'package:flutter/material.dart';
+import 'package:travel_ease/common/utils/imports.dart';
 import 'package:travel_ease/features/auth/services/signout_service.dart';
-import 'package:travel_ease/features/auth/view/sign_in/sign_in_view.dart';
 
 class SignOutProvider with ChangeNotifier {
   final SignOutService _signOutService = SignOutService();
+  bool _isSigningOut = false;
 
-  Future<void> logoutUser(BuildContext context) async {
-    await _signOutService.signOut(
-      context: context,
-      onSignOutSuccess: () {
-        debugPrint('Navigating to SignInView');
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => const SignInView(),
-          ),
-        ); // Navigate to SignInView
-      },
-    );
+  bool get isSigningOut => _isSigningOut;
 
+  Future<bool> signOutUser(BuildContext context) async {
+    _isSigningOut = true;
     notifyListeners();
+
+    try {
+      await _signOutService.signOut();
+      return true;
+    } catch (e) {
+      debugPrint("Sign out failed: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Logout failed. Please try again.")),
+      );
+      return false;
+    } finally {
+      _isSigningOut = false;
+      notifyListeners();
+    }
   }
 }

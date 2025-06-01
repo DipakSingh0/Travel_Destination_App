@@ -1,4 +1,4 @@
-import 'package:travel_ease/imports.dart';
+import 'package:travel_ease/common/utils/imports.dart';
 
 class AppColors {
   static const Color kBlue = Colors.blue;

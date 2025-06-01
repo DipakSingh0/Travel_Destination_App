@@ -1,7 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:travel_ease/imports.dart';
+import 'package:travel_ease/common/utils/imports.dart';
 import 'package:travel_ease/features/core/provider/map_controller.dart';
 
 class MapScreen extends StatefulWidget {

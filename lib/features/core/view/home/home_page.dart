@@ -1,6 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 import 'package:travel_ease/features/core/view/categories/categories_page.dart';
-import 'package:travel_ease/imports.dart';
+import 'package:travel_ease/common/utils/imports.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
