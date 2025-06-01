@@ -9,6 +9,7 @@ class PrimaryButton extends StatefulWidget {
   final double? fontSize;
   final Color? color;
   final Color? textColor;
+  
   const PrimaryButton({
     required this.onTap,
     required this.text,
@@ -70,7 +71,7 @@ class _PrimaryButtonState extends State<PrimaryButton>
             borderRadius: BorderRadius.circular(100),
           ),
           child: Container(
-            height: widget.height ?? 50,
+            height: widget.height ?? 60,
             alignment: Alignment.center,
             width: widget.width ?? double.maxFinite,
             decoration: BoxDecoration(

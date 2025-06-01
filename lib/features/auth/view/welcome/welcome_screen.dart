@@ -1,4 +1,3 @@
-import 'package:travel_ease/features/auth/view/sign_in/sign_in_view.dart';
 import 'package:travel_ease/imports.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -97,19 +96,20 @@ class WelcomeScreen extends StatelessWidget {
             begin: const Offset(0.0,1.2), 
             end: const Offset(0.0, -0.5),
 
-            child: PrimaryButton(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SignInView()),
-                );
-              },
-              text: "Let's Start",
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: PrimaryButton(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SignInView()),
+                  );
+                },
+                text: "Let's Start",
+              ),
             ),
           ),
-          // const SizedBox(
-          //   height: 50,
-          // ),
+     
         ],
       ),
     );
