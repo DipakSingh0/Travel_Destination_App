@@ -1,7 +1,6 @@
-// ignore_for_file: use_build_context_synchronously
-
+import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:travel_ease/common/utils/imports.dart';
+import 'package:travel_ease/features/core/model/destination_model.dart';
 import 'package:travel_ease/features/core/provider/map_controller.dart';
 
 class MapScreen extends StatefulWidget {
@@ -25,7 +24,7 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
-  late final MapController _mapController;
+  late MapController _mapController;
 
   @override
   void initState() {
@@ -40,47 +39,14 @@ class _MapScreenState extends State<MapScreen> {
         destination: widget.destination,
         additionalMarkers: widget.additionalMarkers,
         showCurrentLocation: widget.showCurrentLocation,
-        enableAddMarkers: widget.enableAddMarkers,
+        // enableAddMarkers: widget.enableAddMarkers,
       );
       setState(() {});
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(e.toString())),
+        SnackBar(content: Text('Error initializing map: $e')),
       );
     }
-  }
-
-  Future<void> _addMarkerAtTapPosition(LatLng position) async {
-    if (!_mapController.canAddMarkers) return;
-
-    final controller = TextEditingController();
-    await showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Add Marker'),
-        content: TextField(
-          controller: controller,
-          decoration: const InputDecoration(hintText: 'Enter marker name'),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () {
-              if (controller.text.isNotEmpty) {
-                setState(() {
-                  _mapController.addMarker(position, controller.text);
-                });
-              }
-              Navigator.pop(context);
-            },
-            child: const Text('Add'),
-          ),
-        ],
-      ),
-    );
   }
 
   @override
@@ -102,29 +68,6 @@ class _MapScreenState extends State<MapScreen> {
               });
             },
           ),
-          if (widget.enableAddMarkers)
-            IconButton(
-              icon: Icon(
-                _mapController.canAddMarkers
-                    ? Icons.location_on
-                    : Icons.location_off,
-                color: _mapController.canAddMarkers ? Colors.green : Colors.grey,
-              ),
-              onPressed: () {
-                setState(() {
-                  _mapController.toggleMarkerMode();
-                });
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      _mapController.canAddMarkers
-                          ? 'Tap on the map to add markers'
-                          : 'Marker-adding disabled',
-                    ),
-                  ),
-                );
-              },
-            ),
         ],
       ),
       body: _mapController.isLoading
@@ -133,7 +76,9 @@ class _MapScreenState extends State<MapScreen> {
               children: [
                 GoogleMap(
                   mapType: _mapController.mapType,
-                  onMapCreated: _mapController.onMapCreated,
+                  onMapCreated: (controller) {
+                    _mapController.onMapCreated(controller);
+                  },
                   initialCameraPosition: CameraPosition(
                     target: widget.destination?.location ??
                         _mapController.currentLocation ??
@@ -141,7 +86,7 @@ class _MapScreenState extends State<MapScreen> {
                     zoom: 15.0,
                   ),
                   markers: _mapController.markers,
-                  onTap: _addMarkerAtTapPosition,
+                  polylines: _mapController.polylines,
                   myLocationEnabled: widget.showCurrentLocation,
                   myLocationButtonEnabled: false,
                   compassEnabled: true,
@@ -155,9 +100,39 @@ class _MapScreenState extends State<MapScreen> {
                       onPressed: _mapController.goToCurrentLocation,
                     ),
                   ),
+                if (_mapController.distanceInKm != null)
+                  Positioned(
+                    bottom: 30,
+                    left: 0,
+                    right: 30,
+                    child: Center(
+                      child: Container(
+                        padding: const EdgeInsets.all(8.0),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              offset: const Offset(0, 3),
+                            ),
+                          ],
+                        ),
+                        child: Text(
+                          'Distance: ${_mapController.distanceInKm!.toStringAsFixed(2)} km',
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
               ],
             ),
     );
   }
 }
-

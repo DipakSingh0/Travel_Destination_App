@@ -9,7 +9,7 @@ class MapService {
         serviceEnabled = await Geolocator.openLocationSettings();
         if (!serviceEnabled) return null;
       }
-
+// ---------get permision for location
       LocationPermission permission = await Geolocator.checkPermission();
       if (permission == LocationPermission.denied) {
         permission = await Geolocator.requestPermission();
@@ -26,7 +26,7 @@ class MapService {
       throw Exception('Could not get location: ${e.toString()}');
     }
   }
-
+// --------- marking positions 
   Set<Marker> createMarkers({
     required LatLng? initialLocation,
     required List<LatLng>? additionalMarkers,
@@ -35,7 +35,7 @@ class MapService {
   }) {
     final markers = <Marker>{};
 
-    // ----add current location marker to map---- // 
+    // ----add current location marker to map---- //
     if (currentLocation != null) {
       markers.add(
         Marker(
@@ -47,7 +47,7 @@ class MapService {
       );
     }
 
-    // ----add destination marker to map---- // 
+    // ----add destination marker to map---- //
     if (initialLocation != null) {
       markers.add(
         Marker(
@@ -59,20 +59,7 @@ class MapService {
       );
     }
 
-    // ----add additional markers to map---- //
-    // if (additionalMarkers != null) {
-    //   for (int i = 0; i < additionalMarkers.length; i++) {
-    //     markers.add(
-    //       Marker(
-    //         markerId: MarkerId('additional_marker_$i'),
-    //         position: additionalMarkers[i],
-    //         icon: markerIcon,
-    //         infoWindow: InfoWindow(title: 'Point ${i + 1}'),
-    //       ),
-    //     );
-    //   }
-    // }
-
     return markers;
   }
 }
+
